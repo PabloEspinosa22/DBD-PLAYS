@@ -29,7 +29,7 @@ const killers = [
     { name: "LA DRAGA", hint: "Una abominación de carne y sombras que se teletransporta entre los casilleros y sume el mapa en la oscuridad.", image: "img/draga.png" },
     { name: "EL CEREBRO", hint: "Un villano que usa el virus Uroboros para embestir a gran velocidad y lanzar a los supervivientes por los aires.", image: "img/cerebro.png" },
     { name: "EL CABALLERO", hint: "Invoca a sus guardias leales para que patrullen el mapa y persigan a sus presas por él.", image: "img/caballero.png" },
-    { name: "LA COMERCIANTE DE CALAVERAS", hint: "Despliega drones aéreos que escanean zonas para detectar, exponer y rastrear a los supervivientes.", image: "img/comerciante.png" },
+    { name: "COMERCIANTE DE CALAVERAS", hint: "Despliega drones aéreos que escanean zonas para detectar, exponer y rastrear a los supervivientes.", image: "img/comerciante.png" },
     { name: "LA SINGULARIDAD", hint: "Una IA corrupta que dispara biocápsulas a las paredes para observar y teletransportarse hacia ti.", image: "img/singularidad.png" },
     { name: "EL XENOMORFO", hint: "Un alienígena perfecto que viaja por túneles subterráneos y ataca letalmente con su cola.", image: "img/xenomorfo.png" },
     { name: "EL CHICO BUENO", hint: "Un muñeco poseído muy bajito que insulta mientras corre bajo la hierba para apuñalarte.", image: "img/chico.png" },
@@ -39,7 +39,7 @@ const killers = [
     { name: "VECNA", hint: "Una entidad del Mundo del Revés que atormenta a sus víctimas con sus traumas del pasado, anunciando su maldición con el sonido de un viejo reloj de péndulo.", image: "img/vecna.png" },
     { name: "JASON VOORHEES", hint: "Un asesino implacable e inmortal que acecha los alrededores de Crystal Lake con una máscara de hockey, guiado por la voz incorpórea de su madre.", image: "img/jason.png" },
     { name: "LA KRASUE", hint: "Un espíritu maldito del sudeste asiático que se manifiesta como una cabeza flotante con sus vísceras colgando. Condenada por una traición en su vida humana, el Ente la arrastró a la niebla para saciar su eterno e insaciable hambre de carne y sangre.", image: "img/krasue.png" },
-    { name: "KEN KANEKI", hint: "Un joven convertido en híbrido de ghoul tras un trágico trasplante. Consumido por la locura tras brutales torturas y aceptando su naturaleza caníbal, desató su letal Kagune de ciempiés justo antes de que la niebla negra del Ente lo reclamara como cazador.", image: "img/kaneki.png" }
+    { name: "KANEKI", hint: "Un joven convertido en híbrido de ghoul tras un trágico trasplante. Consumido por la locura tras brutales torturas y aceptando su naturaleza caníbal, desató su letal Kagune de ciempiés justo antes de que la niebla negra del Ente lo reclamara como cazador.", image: "img/kaneki.png" }
 ];
 
 module.exports = killers;
