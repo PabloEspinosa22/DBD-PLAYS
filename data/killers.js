@@ -37,7 +37,9 @@ const killers = [
     { name: "EL LICHE", hint: "Un poderoso archimago que vuela, conjura entidades mágicas y fuerza a usar objetos mágicos.", image: "img/liche.png" },
     { name: "EL SEÑOR OSCURO", hint: "Puede transformarse en un murciélago o un lobo para cazarte, y lanza pilares de fuego infernal.", image: "img/dracula.png" },
     { name: "VECNA", hint: "Una entidad del Mundo del Revés que atormenta a sus víctimas con sus traumas del pasado, anunciando su maldición con el sonido de un viejo reloj de péndulo.", image: "img/vecna.png" },
-    { name: "JASON VOORHEES", hint: "Un asesino implacable e inmortal que acecha los alrededores de Crystal Lake con una máscara de hockey, guiado por la voz incorpórea de su madre.", image: "img/jason.png" }
+    { name: "JASON VOORHEES", hint: "Un asesino implacable e inmortal que acecha los alrededores de Crystal Lake con una máscara de hockey, guiado por la voz incorpórea de su madre.", image: "img/jason.png" },
+    { name: "LA KRASUE", hint: "Un espíritu maldito del sudeste asiático que se manifiesta como una cabeza flotante con sus vísceras colgando. Condenada por una traición en su vida humana, el Ente la arrastró a la niebla para saciar su eterno e insaciable hambre de carne y sangre.", image: "img/krasue.png" },
+    { name: "KEN KANEKI", hint: "Un joven convertido en híbrido de ghoul tras un trágico trasplante. Consumido por la locura tras brutales torturas y aceptando su naturaleza caníbal, desató su letal Kagune de ciempiés justo antes de que la niebla negra del Ente lo reclamara como cazador.", image: "img/kaneki.png" }
 ];
 
 module.exports = killers;
