@@ -82,7 +82,15 @@ function renderWord() {
         .split('')
         .map(letter => {
             if (letter === " ") return " ";
-            return guessedLetters.includes(letter) ? letter : "_";
+            
+            // Convertimos la letra a su versión sin acento solo para comparar
+            const normalizedLetter = letter.replace(/[ÁÀÄÂ]/g, 'A')
+                                           .replace(/[ÉÈËÊ]/g, 'E')
+                                           .replace(/[ÍÌÏÎ]/g, 'I')
+                                           .replace(/[ÓÒÖÔ]/g, 'O')
+                                           .replace(/[ÚÙÜÛ]/g, 'U');
+                                           
+            return guessedLetters.includes(normalizedLetter) ? letter : "_";
         })
         .join('');
     
@@ -99,7 +107,14 @@ function handleGuess(letter) {
     guessedLetters.push(letter);
     document.getElementById(`key-${letter}`).disabled = true;
 
-    if (currentCharacter.includes(letter)) {
+    // Normalizamos todo el nombre del personaje quitando acentos para revisar si acertó
+    const normalizedCharacter = currentCharacter.replace(/[ÁÀÄÂ]/g, 'A')
+                                                .replace(/[ÉÈËÊ]/g, 'E')
+                                                .replace(/[ÍÌÏÎ]/g, 'I')
+                                                .replace(/[ÓÒÖÔ]/g, 'O')
+                                                .replace(/[ÚÙÜÛ]/g, 'U');
+
+    if (normalizedCharacter.includes(letter)) {
         renderWord();
     } else {
         mistakes++;
