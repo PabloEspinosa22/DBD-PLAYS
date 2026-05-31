@@ -11,7 +11,6 @@ router.get('/survivors', (req, res) => {
     res.json(survivors);
 });
 
-// NUEVO: Ruta para obtener absolutamente todos los personajes mezclados
 router.get('/all', (req, res) => {
     res.json([...killers, ...survivors]);
 });

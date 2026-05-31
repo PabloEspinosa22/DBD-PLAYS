@@ -30,7 +30,7 @@ const finalMessage = document.getElementById('final-message');
 const backToMenuBtn = document.getElementById('back-to-menu-btn');
 const modalBox = document.getElementById('modal-box');
 
-// 1. Iniciar el modo
+// Iniciar el modo
 async function startGameMode(mode) {
     currentMode = mode;
     score = 0; 
@@ -38,7 +38,6 @@ async function startGameMode(mode) {
     scoreDisplay.innerText = score;
     livesLeftDisplay.innerText = totalLives;
     
-    // Configuración visual según el bando elegido o el modo mixto
     if(mode === 'killer') {
         gameTitle.innerText = "ADIVINA EL ASESINO";
         gameTitle.style.color = "#d32f2f";
@@ -48,7 +47,6 @@ async function startGameMode(mode) {
         gameTitle.style.color = "#1976d2";
         gameArea.style.boxShadow = "0 0 20px rgba(0, 100, 200, 0.3)";
     } else {
-        // Estilo para el modo mixto ('all')
         gameTitle.innerText = "PRUEBA DE LA NIEBLA";
         gameTitle.style.color = "#a855f7";
         gameArea.style.boxShadow = "0 0 20px rgba(168, 85, 247, 0.3)";
@@ -63,7 +61,6 @@ async function startGameMode(mode) {
 
 async function fetchAllCharacters() {
     try {
-        // Selección del endpoint correcto basado en el modo
         let endpoint = '/api/all';
         if (currentMode === 'killer') endpoint = '/api/killers';
         if (currentMode === 'survivor') endpoint = '/api/survivors';
@@ -154,6 +151,18 @@ function handleGuess(letter) {
     }
 }
 
+function renderKeyboard() {
+    keyboard.innerHTML = "";
+    const letters = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ".split('');
+    letters.forEach(letter => {
+        const btn = document.createElement('button');
+        btn.id = `key-${letter}`;
+        btn.innerText = letter;
+        btn.addEventListener('click', () => handleGuess(letter));
+        keyboard.appendChild(btn);
+    });
+}
+
 function gameOver(isWin) {
     killerImage.src = currentImage;
     killerImage.classList.remove('hidden');
@@ -174,7 +183,6 @@ function gameOver(isWin) {
         totalLives--; 
         livesLeftDisplay.innerText = totalLives;
         
-        // Mensaje de derrota dinámico según el modo
         let loseText = "¡Consumido por la niebla!";
         if (currentMode === 'killer') loseText = "¡Sacrificado!";
         if (currentMode === 'survivor') loseText = "¡Perdido en la niebla!";
@@ -209,7 +217,6 @@ function showFinalGameOver() {
         modalBox.style.borderColor = "#0d47a1";
         modalBox.style.boxShadow = "0 0 30px #0d47a1";
     } else {
-        // Pantalla final para el modo mixto
         finalTitle.innerText = "¡SABOTAJE ABSOLUTO EN LA NIEBLA!";
         finalTitle.style.color = "#a855f7";
         finalMessage.innerText = "Colapsaste ante las pruebas cruzadas del Ente. Nadie escapa de este lugar.";
@@ -220,7 +227,6 @@ function showFinalGameOver() {
     finalModal.classList.remove('hidden');
 }
 
-// Eventos de botones
 restartBtn.addEventListener('click', nextRound);
 
 menuBtn.addEventListener('click', () => {
