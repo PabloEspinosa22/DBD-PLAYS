@@ -13,6 +13,7 @@
         <p class="menu-subtitle">Elige tu bando para comenzar la prueba</p>
         <div class="buttons-container">
             <button class="mode-btn killer-btn" onclick="startGameMode('killer')">ASESINOS</button>
+            <button class="mode-btn all-btn" onclick="startGameMode('all')">TODO EL REINO</button>
             <button class="mode-btn survivor-btn" onclick="startGameMode('survivor')">SUPERVIVIENTES</button>
         </div>
     </div>
@@ -21,7 +22,7 @@
         <h1 id="game-title">Adivina el Personaje</h1>
         
         <div class="score-board">
-            Puntos de Sangre: <span id="score">0</span>
+            Puntos de Sangre: <span id="score">0</span> | Intentos Restantes: <span id="lives-left">3</span>
         </div>
 
         <p id="hint" class="hint">Cargando pista de la Entidad...</p>
@@ -34,6 +35,15 @@
         <div class="action-buttons">
             <button id="restart-btn" class="hidden">Siguiente Partida</button>
             <button id="menu-btn" class="hidden btn-secondary">Cambiar de Bando</button>
+        </div>
+    </div>
+
+    <div id="final-game-over-modal" class="modal hidden">
+        <div class="modal-content" id="modal-box">
+            <h2 id="final-title">¡LA ENTIDAD TE HA RECLAMADO!</h2>
+            <p id="final-message">Tus errores han sellado tu destino en la niebla.</p>
+            <h3 class="final-score-text">Puntos de Sangre Totales: <span id="final-score">0</span></h3>
+            <button id="back-to-menu-btn" class="mode-btn btn-secondary">Regresar a la Fogata</button>
         </div>
     </div>
 
