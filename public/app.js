@@ -1,25 +1,62 @@
-let currentKiller = "";
+let currentMode = ""; // Puede ser 'killer' o 'survivor'
+let currentCharacter = "";
 let currentImage = "";
 let guessedLetters = [];
 let mistakes = 0;
 const maxMistakes = 6;
-let score = 0; // Nueva variable de puntaje
+let score = 0;
 
+// Referencias a los contenedores principales
+const mainMenu = document.getElementById('main-menu');
+const gameArea = document.getElementById('game-area');
+
+// Referencias del juego
 const wordDisplay = document.getElementById('word-display');
 const hintDisplay = document.getElementById('hint');
 const keyboard = document.getElementById('keyboard');
 const mistakesLeft = document.getElementById('mistakes-left');
 const restartBtn = document.getElementById('restart-btn');
+const menuBtn = document.getElementById('menu-btn');
 const killerImage = document.getElementById('killer-image');
-const scoreDisplay = document.getElementById('score'); // Elemento del puntaje
+const scoreDisplay = document.getElementById('score');
+const gameTitle = document.getElementById('game-title');
 
-async function fetchKiller() {
+// Iniciar el modo seleccionado desde el menú
+function startGameMode(mode) {
+    currentMode = mode;
+    score = 0; // Reiniciar puntaje al cambiar de modo
+    scoreDisplay.innerText = score;
+    
+    // Cambiar título y colores según el bando
+    if(mode === 'killer') {
+        gameTitle.innerText = "ADIVINA EL ASESINO";
+        gameTitle.style.color = "#d32f2f";
+        gameArea.style.boxShadow = "0 0 20px rgba(200, 0, 0, 0.3)";
+    } else {
+        gameTitle.innerText = "ADIVINA EL SUPERVIVIENTE";
+        gameTitle.style.color = "#1976d2";
+        gameArea.style.boxShadow = "0 0 20px rgba(0, 100, 200, 0.3)";
+    }
+
+    // Ocultar menú y mostrar juego
+    mainMenu.classList.add('hidden');
+    gameArea.classList.remove('hidden');
+    
+    fetchCharacter();
+}
+
+async function fetchCharacter() {
     try {
-        const response = await fetch('/api/random-killer');
+        // Decide a qué ruta de la API consultar
+        const endpoint = currentMode === 'killer' ? '/api/random-killer' : '/api/random-survivor';
+        
+        const response = await fetch(endpoint);
         const data = await response.json();
-        currentKiller = data.name;
+        
+        currentCharacter = data.name;
         currentImage = data.image;
         hintDisplay.innerText = `Pista: "${data.hint}"`;
+        
         initGame();
     } catch (error) {
         hintDisplay.innerText = "Error al conectar con la Entidad.";
@@ -30,9 +67,10 @@ function initGame() {
     guessedLetters = [];
     mistakes = 0;
     mistakesLeft.innerText = maxMistakes;
-    scoreDisplay.innerText = score; // Actualizamos UI de puntaje al iniciar
+    scoreDisplay.innerText = score;
     
     restartBtn.classList.add('hidden');
+    menuBtn.classList.add('hidden');
     killerImage.classList.add('hidden'); 
     
     renderWord();
@@ -40,7 +78,7 @@ function initGame() {
 }
 
 function renderWord() {
-    const displayWord = currentKiller
+    const displayWord = currentCharacter
         .split('')
         .map(letter => {
             if (letter === " ") return " ";
@@ -61,8 +99,7 @@ function handleGuess(letter) {
     guessedLetters.push(letter);
     document.getElementById(`key-${letter}`).disabled = true;
 
-    // Si la letra está en el nombre (Aceptamos la letra normal o con acentos opcionalmente, pero la BD está en mayúsculas sin acentos)
-    if (currentKiller.includes(letter)) {
+    if (currentCharacter.includes(letter)) {
         renderWord();
     } else {
         mistakes++;
@@ -87,30 +124,36 @@ function renderKeyboard() {
 
 function gameOver(isWin) {
     if (isWin) {
-        // Lógica de puntaje: 1000 pts por adivinar + 500 extras por cada error no cometido
         const pointsEarned = 1000 + ((maxMistakes - mistakes) * 500);
         score += pointsEarned;
         scoreDisplay.innerText = score;
         
         keyboard.innerHTML = `
             <h2 style='color: #4caf50; text-shadow: 0 0 10px #4caf50;'>
-                ¡Escapaste! (+${pointsEarned} PB)
+                ¡Sobreviviste! (+${pointsEarned} PB)
             </h2>`;
     } else {
-        // Penalización: Pierdes tus puntos
         score = 0; 
         scoreDisplay.innerText = score;
         
+        const loseText = currentMode === 'killer' ? "¡Sacrificado!" : "¡Perdido en la niebla!";
+        
         keyboard.innerHTML = `
             <h2 style='color: #d32f2f; text-shadow: 0 0 10px #d32f2f;'>
-                ¡Sacrificado! Era: ${currentKiller}
+                ${loseText} Era: ${currentCharacter}
             </h2>`;
     }
     
     killerImage.src = currentImage;
     killerImage.classList.remove('hidden');
     restartBtn.classList.remove('hidden');
+    menuBtn.classList.remove('hidden');
 }
 
-restartBtn.addEventListener('click', fetchKiller);
-fetchKiller();
+// Escuchadores de los botones finales
+restartBtn.addEventListener('click', fetchCharacter);
+menuBtn.addEventListener('click', () => {
+    // Regresar al menú principal
+    gameArea.classList.add('hidden');
+    mainMenu.classList.remove('hidden');
+});

@@ -109,3 +109,71 @@ h1 {
     margin-bottom: 20px;
     border: 1px solid #e53935;
 }
+
+/* Estilos del Menú Principal */
+.menu-container {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    color: #f5f5f5;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.menu-subtitle {
+    color: #a0a0a0;
+    margin-bottom: 30px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.mode-btn {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.killer-btn {
+    background-color: #b71c1c;
+    box-shadow: 0 0 10px #b71c1c;
+}
+.killer-btn:hover { background-color: #d32f2f; box-shadow: 0 0 20px #d32f2f; }
+
+.survivor-btn {
+    background-color: #0d47a1;
+    box-shadow: 0 0 10px #0d47a1;
+}
+.survivor-btn:hover { background-color: #1976d2; box-shadow: 0 0 20px #1976d2; }
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background-color: #555 !important;
+}
+.btn-secondary:hover {
+    background-color: #777 !important;
+}

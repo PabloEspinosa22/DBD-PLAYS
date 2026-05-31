@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DbD Hangman - Adivina el Asesino</title>
+    <title>DbD Hangman - La Entidad</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>Adivina el Asesino</h1>
+    
+    <div class="menu-container" id="main-menu">
+        <h1 class="main-title">EL REINO DEL ENTE</h1>
+        <p class="menu-subtitle">Elige tu bando para comenzar la prueba</p>
+        <div class="buttons-container">
+            <button class="mode-btn killer-btn" onclick="startGameMode('killer')">ASESINOS</button>
+            <button class="mode-btn survivor-btn" onclick="startGameMode('survivor')">SUPERVIVIENTES</button>
+        </div>
+    </div>
+
+    <div class="game-container hidden" id="game-area">
+        <h1 id="game-title">Adivina el Personaje</h1>
         
         <div class="score-board">
             Puntos de Sangre: <span id="score">0</span>
         </div>
 
         <p id="hint" class="hint">Cargando pista de la Entidad...</p>
-        
         <div id="word-display" class="word-display"></div>
-        
         <p class="status">Errores permitidos: <span id="mistakes-left">6</span></p>
-        
         <div id="keyboard" class="keyboard"></div>
         
-        <img id="killer-image" class="killer-img hidden" src="" alt="Asesino">
+        <img id="killer-image" class="killer-img hidden" src="" alt="Personaje">
         
-        <button id="restart-btn" class="hidden">Siguiente Partida</button>
+        <div class="action-buttons">
+            <button id="restart-btn" class="hidden">Siguiente Partida</button>
+            <button id="menu-btn" class="hidden btn-secondary">Cambiar de Bando</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
