@@ -10,6 +10,27 @@
     
     <div class="menu-container" id="main-menu">
         <h1 class="main-title">EL REINO DEL ENTE</h1>
+        
+        <div class="player-profile">
+            <h2 id="rank-display" class="rank-text">Rango: Ceniza</h2>
+            <p class="bp-text">Puntos de Sangre Totales: <span id="total-bp">0</span></p>
+        </div>
+
+        <div class="ritual-box">
+            <h3>Ritual Diario</h3>
+            <p id="ritual-desc">Cargando ritual...</p>
+        </div>
+
+        <div class="perks-store">
+            <h3>Red de Sangre (Comprar Ventajas)</h3>
+            <div class="perks-buttons">
+                <button id="btn-djv" class="perk-btn" onclick="buyPerk('djv', 3000)">Déjà Vu (3000 PB)</button>
+                <button id="btn-bbq" class="perk-btn" onclick="buyPerk('bbq', 4000)">Barbacoa y Chile (4000 PB)</button>
+                <button id="btn-dh" class="perk-btn" onclick="buyPerk('dh', 5000)">Fajador (5000 PB)</button>
+            </div>
+            <p id="perk-msg" class="perk-msg"></p>
+        </div>
+
         <p class="menu-subtitle">Elige tu bando para comenzar la prueba</p>
         <div class="buttons-container">
             <button class="mode-btn killer-btn" onclick="startGameMode('killer')">ASESINOS</button>
@@ -22,19 +43,22 @@
         <h1 id="game-title">Adivina el Personaje</h1>
         
         <div class="score-board">
-            Puntos de Sangre: <span id="score">0</span> | Intentos Restantes: <span id="lives-left">3</span>
+            PB Ganados: <span id="score">0</span> | Vidas: <span id="lives-left">3</span>
         </div>
 
         <p id="hint" class="hint">Cargando pista de la Entidad...</p>
         <div id="word-display" class="word-display"></div>
         <p class="status">Errores permitidos: <span id="mistakes-left">6</span></p>
+        
         <div id="keyboard" class="keyboard"></div>
+        
+        <button id="hatch-btn" class="hatch-btn hidden">¡BUSCAR TRAMPILLA!</button>
         
         <img id="killer-image" class="killer-img hidden" src="" alt="Personaje">
         
         <div class="action-buttons">
             <button id="restart-btn" class="hidden">Siguiente Partida</button>
-            <button id="menu-btn" class="hidden btn-secondary">Cambiar de Bando</button>
+            <button id="menu-btn" class="hidden btn-secondary">Regresar a la Fogata</button>
         </div>
     </div>
 
@@ -42,8 +66,8 @@
         <div class="modal-content" id="modal-box">
             <h2 id="final-title">¡LA ENTIDAD TE HA RECLAMADO!</h2>
             <p id="final-message">Tus errores han sellado tu destino en la niebla.</p>
-            <h3 class="final-score-text">Puntos de Sangre Totales: <span id="final-score">0</span></h3>
-            <button id="back-to-menu-btn" class="mode-btn btn-secondary">Regresar a la Fogata</button>
+            <h3 class="final-score-text">Puntos Obtenidos: <span id="final-score">0</span></h3>
+            <button id="back-to-menu-btn" class="mode-btn btn-secondary">Aceptar Destino</button>
         </div>
     </div>
 
