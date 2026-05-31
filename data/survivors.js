@@ -1,55 +1,264 @@
 const survivors = [
-    { name: "ACE VISCONTI", hint: "Un apostador con mucha suerte que siempre confía en que las probabilidades estarán a su favor.", image: "img/ace.png" },
-    { name: "ADA WONG", hint: "Una espía corporativa experta en artes marciales y tácticas de infiltración que trabaja en las sombras.", image: "img/ada.png" },
-    { name: "ADAM FRANCIS", hint: "Un profesor jamaicano muy astuto que puede lanzarse piedras a sí mismo para distraer al asesino.", image: "img/adam.png" },
-    { name: "ALAN WAKE", hint: "Un escritor atormentado que usa linternas de forma experta y potencia los tótems con su luz.", image: "img/alan.png" },
-    { name: "ASH WILLIAMS", hint: "El jefe indiscutible, armado con un carácter fuerte y la habilidad de ignorar un golpe fatal tras recibir varios impactos.", image: "img/ash.png" },
-    { name: "BILL OVERBECK", hint: "Un veterano de guerra que nunca se rinde y puede levantarse del suelo por su propia cuenta en situaciones extremas.", image: "img/bill.png" },
-    { name: "CHERYL MASON", hint: "Una joven con conexiones a fuerzas oscuras que puede bloquear generadores y curar con magia del Ente.", image: "img/cheryl.png" },
-    { name: "CLAUDETTE MOREL", hint: "Una botánica estudiosa que utiliza sus conocimientos para curarse a sí misma sin necesidad de un botiquín.", image: "img/claudette.png" },
-    { name: "DAVID KING", hint: "Un ex-luchador rudo que puede recibir un golpe extra usando su 'Fajador' y ganar más puntos al proteger a los demás.", image: "img/david.png" },
-    { name: "DUSTIN HENDERSON", hint: "Un chico nerd de Hawkins con una mente brillante y una gorra icónica, listo para resolver cualquier misterio.", image: "img/dustin.png" },
-    { name: "DWIGHT FAIRFIELD", hint: "Un líder nervioso que es experto en encontrar a otros y trabajar en equipo ocultándose en los casilleros.", image: "img/dwight.png" },
-    { name: "ELLEN RIPLEY", hint: "Una teniente espacial curtida en supervivencia que sabe esconderse sin dejar rastro en los casilleros.", image: "img/ellen.png" },
-    { name: "ÉLODIE RAKOTO", hint: "Una investigadora astuta que puede engañar al asesino al fingir entrar en un casillero.", image: "img/elodie.png" },
-    { name: "FELIX RICHTER", hint: "Un arquitecto visionario que es capaz de ver la ubicación de los generadores y reparar más eficientemente.", image: "img/felix.png" },
-    { name: "FENG MIN", hint: "Una jugadora de e-sports profesional que repara motores en silencio y salta ventanas con gran agilidad.", image: "img/feng.png" },
-    { name: "GABRIEL SOMA", hint: "Un ingeniero espacial clonado diseñado para sobrevivir bajo las peores condiciones de persecución.", image: "img/gabriel.png" },
-    { name: "HADDIE KAUR", hint: "Una podcaster de fenómenos paranormales que puede ver las auras de los generadores tras purificar tótems.", image: "img/haddie.png" },
-    { name: "JAKE PARK", hint: "Un superviviente solitario capaz de sabotear ganchos sin herramientas y mantener la calma para no hacer ruido al estar herido.", image: "img/jake.png" },
-    { name: "JANE ROMERO", hint: "Una presentadora de televisión que puede salir disparada de un casillero para aturdir al asesino.", image: "img/jane.png" },
-    { name: "JEFF JOHANSEN", hint: "Un artista de heavy metal con un corazón de oro que puede romper los ganchos de los que es liberado.", image: "img/jeff.png" },
-    { name: "JILL VALENTINE", hint: "Una agente experta de S.T.A.R.S. que no se rinde fácilmente y puede colocar trampas explosivas en los generadores.", image: "img/jill.png" },
-    { name: "JONAH VASQUEZ", hint: "Un matemático de la CIA que utiliza fórmulas complejas para superar los obstáculos en el Reino del Ente.", image: "img/jonah.png" },
-    { name: "KATE DENSON", hint: "Una cantante de folk que conoce las rutas de escape y no deja marcas de arañazos al saltar ágilmente.", image: "img/kate.png" },
-    { name: "KWON", hint: "Un superviviente metódico que analiza la niebla para encontrar la salida más rápida.", image: "img/kwon.png" },
-    { name: "LARA CROFT", hint: "Una exploradora legendaria acostumbrada a sobrevivir en tumbas antiguas y entornos mortales.", image: "img/lara.png" },
-    { name: "LAURIE STRODE", hint: "La chica final original, que se obsesiona con el asesino y puede apuñalarlo con un trozo de vidrio para escapar de su agarre.", image: "img/laurie.png" },
-    { name: "YUN JIN LEE", hint: "Una productora musical egocéntrica que se beneficia de los errores y el sufrimiento de sus compañeros.", image: "img/lee.png" },
-    { name: "LEON KENNEDY", hint: "Un policía novato que puede crear granadas cegadoras utilizando piezas de los generadores.", image: "img/leon.png" },
-    { name: "MEG THOMAS", hint: "Una atleta llena de energía capaz de salir corriendo a gran velocidad en el momento crítico de una persecución.", image: "img/meg.png" },
-    { name: "MICHONNE", hint: "Una superviviente letal del apocalipsis zombie que maneja la tensión con nervios de acero.", image: "img/michonne.png" },
-    { name: "MIKAELA REID", hint: "Una joven bruja moderna que bendice tótems para crear zonas de curación para su equipo.", image: "img/mikaela.png" },
-    { name: "NANCY WHEELER", hint: "Una aspirante a periodista que repara motores más rápido si se concentra y sabe encontrar tótems ocultos.", image: "img/nancy.png" },
-    { name: "NEA KARLSSON", hint: "Una artista callejera con gran agilidad que puede caer desde grandes alturas sin desequilibrarse ni hacer ruido.", image: "img/nea.png" },
-    { name: "NICOLAS CAGE", hint: "Un legendario actor que puede fingir su propia muerte para engañar al asesino o correr de forma dramática.", image: "img/nicolas.png" },
-    { name: "ONCE", hint: "Una joven con habilidades telequinéticas y un pasado oscuro en laboratorios del gobierno.", image: "img/once.png" },
-    { name: "ORELA", hint: "Alguien que domina la niebla utilizando su ingenio para evadir las patrullas enemigas.", image: "img/orela.png" },
-    { name: "QUENTIN SMITH", hint: "Un joven con ojeras profundas que intenta mantenerse despierto, abriendo cofres más rápido en busca de medicinas.", image: "img/quentin.png" },
-    { name: "REBECCA CHAMBERS", hint: "Una médica prodigio que inspira a sus compañeros y puede detener el progreso de las entidades en los ganchos.", image: "img/rebecca.png" },
-    { name: "RENATO LYRA", hint: "Un chico brasileño ágil y familiar, que gana velocidad adicional trabajando junto a su hermana.", image: "img/renato.png" },
-    { name: "RICK GRIMES", hint: "Un líder implacable dispuesto a cruzar cualquier límite para asegurar la supervivencia de su grupo.", image: "img/rick.png" },
-    { name: "SABLE WARD", hint: "Una chica interesada en el ocultismo que prefiere hacer invocaciones peligrosas en el mismísimo sótano del asesino.", image: "img/sable.png" },
-    { name: "STEVE HARRINGTON", hint: "Un ex-chico popular que arriesga su vida para descolgar a sus amigos y curarlos en situaciones desesperadas.", image: "img/steve.png" },
-    { name: "DAVID TAPP", hint: "Un detective obsesionado que se arrastra más rápido por el suelo para no rendirse ante los juegos macabros.", image: "img/tapp.png" },
-    { name: "TAURIE", hint: "Una figura escurridiza que aprovecha la confusión para alejarse de la mirada del asesino.", image: "img/taurie.png" },
-    { name: "THALITA LYRA", hint: "Una chica vibrante y optimista que fomenta la colaboración y el trabajo en equipo durante las persecuciones.", image: "img/thalita.png" },
-    { name: "TREVOR BELMONT", hint: "Un cazador implacable perteneciente a un linaje ancestral dedicado a erradicar las fuerzas oscuras.", image: "img/trevor.png" },
-    { name: "VEE", hint: "Una experta en sigilo que se mueve por la periferia del mapa pasando desapercibida.", image: "img/vee.png" },
-    { name: "VITTORIO TOSCANO", hint: "Un erudito medieval que ha vagado por la niebla durante siglos descifrando los secretos del Ente.", image: "img/vittorio.png" },
-    { name: "YOICHI ASAKAWA", hint: "Un biólogo marino marcado por una maldición familiar que sabe cómo ocultar rastros y potenciar a otros.", image: "img/yoichi.png" },
-    { name: "YUI KIMURA", hint: "Una corredora de motos callejeras que puede levantar palés caídos para volver a utilizarlos.", image: "img/yui.png" },
-    { name: "ZARINA KASSIR", hint: "Una cineasta independiente audaz que sacrifica su propia salud para curar instantáneamente a sus compañeros.", image: "img/zarina.png" }
+    { 
+        name: "ACE VISCONTI", 
+        hint: "Un apostador con mucha suerte que, tras acumular deudas peligrosas en Argentina, confió en que la niebla sería su vía de escape.", 
+        image: "img/ace.png" 
+    },
+    { 
+        name: "ADA WONG", 
+        hint: "Una espía corporativa experta que, mientras escapaba de la destrucción en Raccoon City, fue envuelta por una misteriosa niebla negra.", 
+        image: "img/ada.png" 
+    },
+    { 
+        name: "ADAM FRANCIS", 
+        hint: "Un profesor jamaicano que vivía en Japón. Fue tragado por el Ente tras sacrificarse para proteger a una estudiante en un accidente de tren.", 
+        image: "img/adam.png" 
+    },
+    { 
+        name: "ALAN WAKE", 
+        hint: "Un escritor atrapado en el Lugar Oscuro. El Ente lo sacó de su interminable bucle de pesadillas para llevarlo a un nuevo infierno.", 
+        image: "img/alan.png" 
+    },
+    { 
+        name: "ASH WILLIAMS", 
+        hint: "Tras luchar contra los demonios del Necronomicón en una cabaña, un portal lo arrastró directamente hacia el Reino del Ente.", 
+        image: "img/ash.png" 
+    },
+    { 
+        name: "BILL OVERBECK", 
+        hint: "Un veterano de guerra que se sacrificó por su equipo durante el apocalipsis zombi, despertando en la fogata en lugar de morir.", 
+        image: "img/bill.png" 
+    },
+    { 
+        name: "CHERYL MASON", 
+        hint: "Una joven con conexiones a fuerzas oscuras que, tras sobrevivir a los horrores de Silent Hill, fue reclamada por el Ente.", 
+        image: "img/cheryl.png" 
+    },
+    { 
+        name: "CLAUDETTE MOREL", 
+        hint: "Una botánica introvertida que se perdió en el bosque durante un paseo recolectando plantas y nunca encontró el camino a casa.", 
+        image: "img/claudette.png" 
+    },
+    { 
+        name: "DAVID KING", 
+        hint: "Un ex-luchador rudo de Manchester que, tras una violenta pelea de bar que se salió de control, desapareció sin dejar rastro.", 
+        image: "img/david.png" 
+    },
+    { 
+        name: "DUSTIN HENDERSON", 
+        hint: "Un chico de Hawkins con una mente brillante y una gorra icónica, arrastrado a la niebla por su conexión con el Mundo del Revés.", 
+        image: "img/dustin.png" 
+    },
+    { 
+        name: "DWIGHT FAIRFIELD", 
+        hint: "Un líder nervioso que fue abandonado por sus abusivos compañeros de trabajo en lo profundo del bosque durante un ejercicio de integración.", 
+        image: "img/dwight.png" 
+    },
+    { 
+        name: "ELLEN RIPLEY", 
+        hint: "Una teniente espacial curtida en supervivencia que fue arrebatada por el Ente desde las frías y oscuras profundidades del espacio.", 
+        image: "img/ellen.png" 
+    },
+    { 
+        name: "ÉLODIE RAKOTO", 
+        hint: "Una investigadora que viajó a la Isla Dyer buscando la verdad sobre la desaparición de sus padres y fue absorbida por el ocultismo.", 
+        image: "img/elodie.png" 
+    },
+    { 
+        name: "FELIX RICHTER", 
+        hint: "Un exitoso arquitecto que desapareció en la misma niebla oscura que años atrás se había llevado a su padre en la Isla Dyer.", 
+        image: "img/felix.png" 
+    },
+    { 
+        name: "FENG MIN", 
+        hint: "Una jugadora de e-sports profesional que, abrumada por la presión y el fracaso, bebió hasta quedarse dormida y despertó en la niebla.", 
+        image: "img/feng.png" 
+    },
+    { 
+        name: "GABRIEL SOMA", 
+        hint: "Un ingeniero espacial clonado. Fue el único sobreviviente de una misión fallida antes de que la Singularidad y el Ente lo alcanzaran.", 
+        image: "img/gabriel.png" 
+    },
+    { 
+        name: "HADDIE KAUR", 
+        hint: "Una podcaster paranormal con la habilidad de ver 'Cicatrices' entre mundos. Investigó demasiado cerca y cayó en el Reino del Ente.", 
+        image: "img/haddie.png" 
+    },
+    { 
+        name: "JAKE PARK", 
+        hint: "Heredero de una fortuna que huyó de la presión familiar para vivir en la naturaleza, donde la niebla lo consumió lentamente.", 
+        image: "img/jake.png" 
+    },
+    { 
+        name: "JANE ROMERO", 
+        hint: "Una famosa presentadora de televisión que, exhausta tras un largo día de trabajo, estrelló su auto en un río y despertó junto a la fogata.", 
+        image: "img/jane.png" 
+    },
+    { 
+        name: "JEFF JOHANSEN", 
+        hint: "Un artista de heavy metal con un corazón de oro. Tomó un viaje por carretera hacia su ciudad natal, Ormond, y nunca llegó a su destino.", 
+        image: "img/jeff.png" 
+    },
+    { 
+        name: "JILL VALENTINE", 
+        hint: "Una agente experta de S.T.A.R.S. que fue secuestrada por la niebla negra justo cuando intentaba escapar de un arma biológica imparable.", 
+        image: "img/jill.png" 
+    },
+    { 
+        name: "JONAH VASQUEZ", 
+        hint: "Un matemático de la CIA que rastreó un misterioso patrón numérico hasta un cementerio en Chile, donde una bandada de cuervos lo rodeó.", 
+        image: "img/jonah.png" 
+    },
+    { 
+        name: "KATE DENSON", 
+        hint: "Una cantante de folk que, mientras buscaba inspiración en el bosque, fue arrastrada a un agujero oscuro por tentáculos de niebla.", 
+        image: "img/kate.png" 
+    },
+    { 
+        name: "KWON", 
+        hint: "Un superviviente metódico que desapareció en las sombras mientras buscaba respuestas a un misterio que consumió a su familia.", 
+        image: "img/kwon.png" 
+    },
+    { 
+        name: "LARA CROFT", 
+        hint: "Una legendaria saqueadora de tumbas que, tras quedar atrapada en el derrumbe de unas antiguas ruinas, fue reclamada por la oscuridad.", 
+        image: "img/lara.png" 
+    },
+    { 
+        name: "LAURIE STRODE", 
+        hint: "La chica final original. Mientras luchaba por su vida contra la maldad encarnada en la noche de Halloween, la niebla los tragó a ambos.", 
+        image: "img/laurie.png" 
+    },
+    { 
+        name: "YUN JIN LEE", 
+        hint: "Una productora musical egocéntrica. El Ente se la llevó tras presenciar cómo el idol que ella misma creó masacraba a la junta directiva.", 
+        image: "img/lee.png" 
+    },
+    { 
+        name: "LEON KENNEDY", 
+        hint: "Un policía novato que sobrevivió al infierno en su primer día en Raccoon City, solo para ser trasladado a un infierno aún peor.", 
+        image: "img/leon.png" 
+    },
+    { 
+        name: "MEG THOMAS", 
+        hint: "Una atleta llena de energía que cuidaba a su madre enferma. Salió a correr al bosque para despejar su mente y nunca regresó.", 
+        image: "img/meg.png" 
+    },
+    { 
+        name: "MICHONNE", 
+        hint: "Una guerrera letal que, tras sobrevivir incontables días en el apocalipsis zombi, caminó directo hacia una espesa y antinatural niebla.", 
+        image: "img/michonne.png" 
+    },
+    { 
+        name: "MIKAELA REID", 
+        hint: "Una bruja moderna que desapareció sin dejar rastro en medio de su cafetería tras leer una historia de terror en la noche de Halloween.", 
+        image: "img/mikaela.png" 
+    },
+    { 
+        name: "NANCY WHEELER", 
+        hint: "Una aspirante a periodista que, al adentrarse en los misterios del Laboratorio Nacional de Hawkins, fue arrastrada a este oscuro reino.", 
+        image: "img/nancy.png" 
+    },
+    { 
+        name: "NEA KARLSSON", 
+        hint: "Una grafitera rebelde y solitaria que decidió patinar en el asilo abandonado de Crotus Prenn y se desvaneció en la oscuridad.", 
+        image: "img/nea.png" 
+    },
+    { 
+        name: "NICOLAS CAGE", 
+        hint: "Un legendario actor que pronunció unas líneas de un guion maldito con demasiada convicción, invocando a la Entidad en pleno set de grabación.", 
+        image: "img/nicolas.png" 
+    },
+    { 
+        name: "ONCE", 
+        hint: "Una joven con habilidades telequinéticas. Su poderosa conexión psíquica con el Mundo del Revés atrajo la mirada hambrienta de la Entidad.", 
+        image: "img/once.png" 
+    },
+    { 
+        name: "ORELA", 
+        hint: "Desapareció en las sombras mientras intentaba huir desesperadamente de una misteriosa secta, despertando aterrada junto a la fogata.", 
+        image: "img/orela.png" 
+    },
+    { 
+        name: "LA COMPANIA", 
+        hint: "Un grupo de bardos aventureros que, durante una de sus misiones en tierras de fantasía, fueron transportados por una niebla mágica directamente al Reino del Ente.", 
+        image: "img/compañia.png" 
+    },
+    { 
+        name: "QUENTIN SMITH", 
+        hint: "Un joven atrapado en el Mundo de los Sueños. Cuando creyó que no podía despertar de su pesadilla, el Ente lo reclamó.", 
+        image: "img/quentin.png" 
+    },
+    { 
+        name: "REBECCA CHAMBERS", 
+        hint: "Una médica prodigio de S.T.A.R.S. que sobrevivió a los horrores de las montañas Arklay, pero no pudo escapar de las garras de la niebla.", 
+        image: "img/rebecca.png" 
+    },
+    { 
+        name: "RENATO LYRA", 
+        hint: "Un chico brasileño que, junto a su hermana, fue atacado por un macabro dron cibernético en la playa antes de que la niebla los engullera.", 
+        image: "img/renato.png" 
+    },
+    { 
+        name: "RICK GRIMES", 
+        hint: "Un líder implacable que despertó en un mundo desolado. Guiando a su grupo en busca de un refugio, fue devorado por una extraña tormenta.", 
+        image: "img/rick.png" 
+    },
+    { 
+        name: "SABLE WARD", 
+        hint: "Una chica interesada en el ocultismo. Caminó voluntariamente hacia la niebla en el sótano de un cine para buscar a su mejor amiga perdida.", 
+        image: "img/sable.png" 
+    },
+    { 
+        name: "STEVE HARRINGTON", 
+        hint: "Un ex-chico popular convertido en niñero valiente. Fue absorbido por la niebla mientras protegía a sus amigos de fuerzas interdimensionales.", 
+        image: "img/steve.png" 
+    },
+    { 
+        name: "DAVID TAPP", 
+        hint: "Un detective obsesionado. Justo cuando se desangraba en el suelo tras recibir un disparo investigando a Jigsaw, la Entidad se lo llevó.", 
+        image: "img/tapp.png" 
+    },
+    { 
+        name: "TAURIE", 
+        hint: "Atrapada por la niebla negra y arrastrada hacia la fogata tras perderse irremediablemente en un denso bosque durante una tormenta.", 
+        image: "img/taurie.png" 
+    },
+    { 
+        name: "THALITA LYRA", 
+        hint: "Una fabricante de cometas brasileña que desapareció de las cálidas arenas de su hogar tras enfrentarse a una letal máquina de matar.", 
+        image: "img/thalita.png" 
+    },
+    { 
+        name: "TREVOR BELMONT", 
+        hint: "Un cazador implacable. Mientras erradicaba las fuerzas de la noche, la niebla lo reclamó junto con el mismísimo Señor Oscuro.", 
+        image: "img/trevor.png" 
+    },
+    { 
+        name: "VEE", 
+        hint: "Una viajera solitaria cuya caravana fue envuelta repentinamente por una gélida y sobrenatural niebla negra a mitad de la carretera.", 
+        image: "img/vee.png" 
+    },
+    { 
+        name: "VITTORIO TOSCANO", 
+        hint: "Un erudito medieval traicionado por su caballero protector. Ha vagado por los rincones del Reino del Ente durante siglos.", 
+        image: "img/vittorio.png" 
+    },
+    { 
+        name: "YOICHI ASAKAWA", 
+        hint: "Un biólogo marino marcado por una maldición familiar. Viajó en barco buscando curar su pasado y terminó navegando directo a la oscuridad.", 
+        image: "img/yoichi.png" 
+    },
+    { 
+        name: "YUI KIMURA", 
+        hint: "Una valiente corredora de motos callejeras. En medio de una carrera ilegal en las montañas de Japón, atravesó un denso y espectral humo.", 
+        image: "img/yui.png" 
+    },
+    { 
+        name: "ZARINA KASSIR", 
+        hint: "Una cineasta independiente audaz. Investigando una masacre en la Penitenciaría de Hellshire, quedó atrapada tras los muros de la prisión eterna.", 
+        image: "img/zarina.png" 
+    }
 ];
 
 module.exports = survivors;
