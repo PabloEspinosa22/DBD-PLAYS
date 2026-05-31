@@ -32,7 +32,7 @@ const killers = [
     { name: "LA COMERCIANTE DE CALAVERAS", hint: "Despliega drones aéreos que escanean zonas para detectar, exponer y rastrear a los supervivientes.", image: "img/comerciante.png" },
     { name: "LA SINGULARIDAD", hint: "Una IA corrupta que dispara biocápsulas a las paredes para observar y teletransportarse hacia ti.", image: "img/singularidad.png" },
     { name: "EL XENOMORFO", hint: "Un alienígena perfecto que viaja por túneles subterráneos y ataca letalmente con su cola.", image: "img/xenomorfo.png" },
-    { name: "EL CHICO BUENO", hint: "Un muñeco poseído muy bajito que insulta mientras corre bajo la hierba para apuñalarte.", image: "img/chico_bueno.png" },
+    { name: "EL CHICO BUENO", hint: "Un muñeco poseído muy bajito que insulta mientras corre bajo la hierba para apuñalarte.", image: "img/chico.png" },
     { name: "LO DESCONOCIDO", hint: "Una criatura de terror urbano que lanza proyectiles venenosos que rebotan y crea alucinaciones de sí mismo.", image: "img/desconocido.png" },
     { name: "EL LICHE", hint: "Un poderoso archimago que vuela, conjura entidades mágicas y fuerza a usar objetos mágicos.", image: "img/liche.png" },
     { name: "EL SEÑOR OSCURO", hint: "Puede transformarse en un murciélago o un lobo para cazarte, y lanza pilares de fuego infernal.", image: "img/dracula.png" },
