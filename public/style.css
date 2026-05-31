@@ -1,5 +1,15 @@
 body {
-    background: radial-gradient(circle at center, #2a2a2a 0%, #0a0a0a 100%);
+    /* El linear-gradient agrega un filtro oscuro semi-transparente sobre tu imagen 
+       para asegurar que el texto y los contenedores sigan siendo legibles */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), 
+        url('img/fondo.png');
+    
+    background-size: cover;         /* Hace que la imagen cubra toda la pantalla */
+    background-position: center;    /* Centra la imagen */
+    background-repeat: no-repeat;   /* Evita que se repita como mosaico */
+    background-attachment: fixed;   /* Hace que el fondo se quede quieto si haces scroll */
+    
     color: #e0e0e0;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
