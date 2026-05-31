@@ -1,4 +1,4 @@
-let currentMode = ""; // Puede ser 'killer' o 'survivor'
+let currentMode = ""; 
 let currentCharacter = "";
 let currentImage = "";
 let guessedLetters = [];
@@ -6,11 +6,12 @@ let mistakes = 0;
 const maxMistakes = 6;
 let score = 0;
 
-// Referencias a los contenedores principales
+// Nuevo: Arreglo para llevar el control de los que no han salido
+let availableCharacters = []; 
+
+// Referencias a los contenedores
 const mainMenu = document.getElementById('main-menu');
 const gameArea = document.getElementById('game-area');
-
-// Referencias del juego
 const wordDisplay = document.getElementById('word-display');
 const hintDisplay = document.getElementById('hint');
 const keyboard = document.getElementById('keyboard');
@@ -21,13 +22,12 @@ const killerImage = document.getElementById('killer-image');
 const scoreDisplay = document.getElementById('score');
 const gameTitle = document.getElementById('game-title');
 
-// Iniciar el modo seleccionado desde el menú
-function startGameMode(mode) {
+// 1. Iniciar el modo
+async function startGameMode(mode) {
     currentMode = mode;
-    score = 0; // Reiniciar puntaje al cambiar de modo
+    score = 0; 
     scoreDisplay.innerText = score;
     
-    // Cambiar título y colores según el bando
     if(mode === 'killer') {
         gameTitle.innerText = "ADIVINA EL ASESINO";
         gameTitle.style.color = "#d32f2f";
@@ -38,31 +38,53 @@ function startGameMode(mode) {
         gameArea.style.boxShadow = "0 0 20px rgba(0, 100, 200, 0.3)";
     }
 
-    // Ocultar menú y mostrar juego
     mainMenu.classList.add('hidden');
     gameArea.classList.remove('hidden');
     
-    fetchCharacter();
+    // Descargamos la base de datos completa del bando elegido
+    await fetchAllCharacters();
+    nextRound();
 }
 
-async function fetchCharacter() {
+// 2. Descargar toda la lista
+async function fetchAllCharacters() {
     try {
-        // Decide a qué ruta de la API consultar
-        const endpoint = currentMode === 'killer' ? '/api/random-killer' : '/api/random-survivor';
-        
+        const endpoint = currentMode === 'killer' ? '/api/killers' : '/api/survivors';
         const response = await fetch(endpoint);
-        const data = await response.json();
-        
-        currentCharacter = data.name;
-        currentImage = data.image;
-        hintDisplay.innerText = `Pista: "${data.hint}"`;
-        
-        initGame();
+        // Guardamos todos los personajes en nuestra variable de control
+        availableCharacters = await response.json();
     } catch (error) {
         hintDisplay.innerText = "Error al conectar con la Entidad.";
     }
 }
 
+// 3. Preparar la siguiente ronda
+function nextRound() {
+    // Si la lista se vació (ya jugaste a todos), recargamos la lista desde cero
+    if (availableCharacters.length === 0) {
+        hintDisplay.innerText = "¡Has adivinado a todos! Reiniciando la niebla...";
+        fetchAllCharacters().then(() => selectRandomCharacter());
+    } else {
+        selectRandomCharacter();
+    }
+}
+
+// 4. Seleccionar un personaje y ELIMINARLO de la lista
+function selectRandomCharacter() {
+    // Elegimos un índice al azar de los que quedan
+    const randomIndex = Math.floor(Math.random() * availableCharacters.length);
+    
+    // splice() extrae el elemento del arreglo, asegurando que ya no esté disponible
+    const characterData = availableCharacters.splice(randomIndex, 1)[0];
+    
+    currentCharacter = characterData.name;
+    currentImage = characterData.image;
+    hintDisplay.innerText = `Pista: "${characterData.hint}"`;
+    
+    initGame();
+}
+
+// Lógica base del juego
 function initGame() {
     guessedLetters = [];
     mistakes = 0;
@@ -82,14 +104,11 @@ function renderWord() {
         .split('')
         .map(letter => {
             if (letter === " ") return " ";
-            
-            // Convertimos la letra a su versión sin acento solo para comparar
             const normalizedLetter = letter.replace(/[ÁÀÄÂ]/g, 'A')
                                            .replace(/[ÉÈËÊ]/g, 'E')
                                            .replace(/[ÍÌÏÎ]/g, 'I')
                                            .replace(/[ÓÒÖÔ]/g, 'O')
                                            .replace(/[ÚÙÜÛ]/g, 'U');
-                                           
             return guessedLetters.includes(normalizedLetter) ? letter : "_";
         })
         .join('');
@@ -107,7 +126,6 @@ function handleGuess(letter) {
     guessedLetters.push(letter);
     document.getElementById(`key-${letter}`).disabled = true;
 
-    // Normalizamos todo el nombre del personaje quitando acentos para revisar si acertó
     const normalizedCharacter = currentCharacter.replace(/[ÁÀÄÂ]/g, 'A')
                                                 .replace(/[ÉÈËÊ]/g, 'E')
                                                 .replace(/[ÍÌÏÎ]/g, 'I')
@@ -145,12 +163,11 @@ function gameOver(isWin) {
         
         keyboard.innerHTML = `
             <h2 style='color: #4caf50; text-shadow: 0 0 10px #4caf50;'>
-                ¡Sobreviviste! (+${pointsEarned} PB)
+                ¡Prueba superada! (+${pointsEarned} PB)
             </h2>`;
     } else {
         score = 0; 
         scoreDisplay.innerText = score;
-        
         const loseText = currentMode === 'killer' ? "¡Sacrificado!" : "¡Perdido en la niebla!";
         
         keyboard.innerHTML = `
@@ -165,10 +182,11 @@ function gameOver(isWin) {
     menuBtn.classList.remove('hidden');
 }
 
-// Escuchadores de los botones finales
-restartBtn.addEventListener('click', fetchCharacter);
+// Eventos de botones modificados para usar nextRound()
+restartBtn.addEventListener('click', nextRound);
+
 menuBtn.addEventListener('click', () => {
-    // Regresar al menú principal
     gameArea.classList.add('hidden');
     mainMenu.classList.remove('hidden');
+    availableCharacters = []; // Limpiamos la lista al salir al menú principal
 });

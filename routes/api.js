@@ -1,18 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const killers = require('../data/killers');
-const survivors = require('../data/survivors'); // <-- Nueva base de datos
+const survivors = require('../data/survivors');
 
-// Ruta para asesinos
-router.get('/random-killer', (req, res) => {
-    const randomIndex = Math.floor(Math.random() * killers.length);
-    res.json(killers[randomIndex]);
+// Ahora enviamos los arreglos completos
+router.get('/killers', (req, res) => {
+    res.json(killers);
 });
 
-// Ruta para supervivientes
-router.get('/random-survivor', (req, res) => {
-    const randomIndex = Math.floor(Math.random() * survivors.length);
-    res.json(survivors[randomIndex]);
+router.get('/survivors', (req, res) => {
+    res.json(survivors);
 });
 
 module.exports = router;
