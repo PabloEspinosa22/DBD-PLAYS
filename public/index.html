@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="mute-btn" class="mute-btn" onclick="toggleMute()">🔊 Sonido: ON</button>
     
     <div class="menu-container" id="main-menu">
         <h1 class="main-title">EL REINO DEL ENTE</h1>
@@ -31,11 +32,12 @@
             <p id="perk-msg" class="perk-msg"></p>
         </div>
 
-        <p class="menu-subtitle">Elige tu bando para comenzar la prueba</p>
+        <p class="menu-subtitle">Elige tu prueba</p>
         <div class="buttons-container">
             <button class="mode-btn killer-btn" onclick="startGameMode('killer')">ASESINOS</button>
-            <button class="mode-btn all-btn" onclick="startGameMode('all')">TODO EL REINO</button>
             <button class="mode-btn survivor-btn" onclick="startGameMode('survivor')">SUPERVIVIENTES</button>
+            <button class="mode-btn all-btn" onclick="startGameMode('all')">TODO EL REINO</button>
+            <button class="mode-btn archive-btn" onclick="startGameMode('archive')">LOS ARCHIVOS (Dedúcelo)</button>
         </div>
     </div>
 
@@ -46,18 +48,29 @@
             PB Ganados: <span id="score">0</span> | Vidas: <span id="lives-left">3</span>
         </div>
 
-        <p id="hint" class="hint">Cargando pista de la Entidad...</p>
-        <div id="word-display" class="word-display"></div>
         <p class="status">Errores permitidos: <span id="mistakes-left">6</span></p>
         
+        <p id="hint" class="hint">Cargando pista...</p>
+        <div id="word-display" class="word-display"></div>
         <div id="keyboard" class="keyboard"></div>
+
+        <div id="archive-ui" class="hidden">
+            <div class="stats-grid">
+                <div class="stat-box"><span>Velocidad:</span> <strong id="stat-speed">-</strong></div>
+                <div class="stat-box"><span>Año de salida:</span> <strong id="stat-year">-</strong></div>
+                <div class="stat-box"><span>Género:</span> <strong id="stat-gender">-</strong></div>
+            </div>
+            <select id="character-select" class="char-dropdown">
+                <option value="">Selecciona al personaje...</option>
+            </select>
+            <button id="submit-guess-btn" class="btn-primary">CONFIRMAR IDENTIDAD</button>
+        </div>
         
         <button id="hatch-btn" class="hatch-btn hidden">¡BUSCAR TRAMPILLA!</button>
-        
         <img id="killer-image" class="killer-img hidden" src="" alt="Personaje">
         
         <div class="action-buttons">
-            <button id="restart-btn" class="hidden">Siguiente Partida</button>
+            <button id="restart-btn" class="hidden btn-primary">Siguiente Partida</button>
             <button id="menu-btn" class="hidden btn-secondary">Regresar a la Fogata</button>
         </div>
     </div>
