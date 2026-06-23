@@ -54,16 +54,30 @@
         <div id="word-display" class="word-display"></div>
         <div id="keyboard" class="keyboard"></div>
 
-        <div id="archive-ui" class="hidden">
-            <div class="stats-grid">
-                <div class="stat-box"><span>Velocidad:</span> <strong id="stat-speed">-</strong></div>
-                <div class="stat-box"><span>Año de salida:</span> <strong id="stat-year">-</strong></div>
-                <div class="stat-box"><span>Género:</span> <strong id="stat-gender">-</strong></div>
+        <div id="archive-ui" class="hidden archive-dbdle-container">
+            <p class="archive-subtitle">Accediendo a la base de datos de la Entidad...</p>
+            
+            <div class="dbdle-input-wrapper">
+                <input type="text" id="char-search-input" placeholder="Escribe el nombre del sujeto..." autocomplete="off">
+                <span class="input-arrow">ᐳ</span>
+                <div id="autocomplete-list" class="autocomplete-items hidden"></div>
             </div>
-            <select id="character-select" class="char-dropdown">
-                <option value="">Selecciona al personaje...</option>
-            </select>
-            <button id="submit-guess-btn" class="btn-primary">CONFIRMAR IDENTIDAD</button>
+
+            <div class="dbdle-legend">
+                <span><span class="legend-box match"></span> Coincidencia</span>
+                <span><span class="legend-box wrong"></span> Incorrecto</span>
+                <span><span class="legend-hint">↑ ↓</span> Año mayor / menor</span>
+            </div>
+
+            <div class="dbdle-table">
+                <div class="dbdle-header">
+                    <div class="col-name">Sujeto</div>
+                    <div>Género</div>
+                    <div>Velocidad</div>
+                    <div>Año</div>
+                </div>
+                <div id="guesses-grid" class="guesses-grid"></div>
+            </div>
         </div>
         
         <button id="hatch-btn" class="hatch-btn hidden">¡BUSCAR TRAMPILLA!</button>
