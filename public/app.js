@@ -15,7 +15,9 @@ function render(role) {
     document.getElementById('archive-ui').classList.add('hidden');
     document.getElementById('content-display').classList.remove('hidden');
     const container = document.getElementById('content-display');
-    const filtered = fullRoster.filter(c => (role === 'killer' ? c.rol === 'Asesino' : c.rol === 'Superviviente'));
+    const filtered = (currentMode === 'killer') ? killersList.filter(c => c.name.toLowerCase().includes(val)) :
+                 (currentMode === 'survivor') ? survivorsList.filter(c => c.name.toLowerCase().includes(val)) :
+                 [...killersList, ...survivorsList].filter(c => c.name.toLowerCase().includes(val));
     
     container.innerHTML = filtered.map(char => `
         <div class="card">
