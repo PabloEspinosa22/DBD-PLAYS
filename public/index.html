@@ -2,38 +2,66 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>DbD Database & Games</title>
-    <link rel="stylesheet" href="style.css?v=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DbD - Los Archivos</title>
+    <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 <body>
     <header class="main-header">
         <h1>REINO DEL ENTE</h1>
         <div class="tabs">
-            <button onclick="render('killer')">Ver Asesinos</button>
-            <button onclick="render('survivor')">Ver Supervivientes</button>
-            <button onclick="startGameMode('archive')" class="archive-btn">LOS ARCHIVOS (Jugar)</button>
+            <button onclick="showCatalog('killer')" class="tab-btn">Catálogo Asesinos</button>
+            <button onclick="showCatalog('survivor')" class="tab-btn">Catálogo Supervivientes</button>
+            <button onclick="startDbdle('killer')" class="dbdle-btn">Jugar: Asesino</button>
+            <button onclick="startDbdle('survivor')" class="dbdle-btn">Jugar: Superviviente</button>
         </div>
-        <input type="text" id="search" placeholder="Buscar por nombre..." onkeyup="filterData()">
     </header>
 
-    <div id="game-area" class="container">
-        <!-- Vista de catálogo -->
-        <div id="content-display" class="grid-container"></div>
+    <div class="container">
         
-        <!-- Vista de juego DbDle -->
-        <div id="archive-ui" class="hidden archive-dbdle-container">
+        <div id="catalog-view">
+            <div class="search-container">
+                <input type="text" id="catalog-search" placeholder="Buscar en el catálogo..." onkeyup="filterCatalog()">
+            </div>
+            <div id="catalog-grid" class="grid-container"></div>
+        </div>
+
+        <div id="dbdle-view" class="hidden">
+            <h2 id="dbdle-title" class="mode-title">¿ADIVINAS EL PERSONAJE DE HOY?</h2>
+            
             <div class="dbdle-input-wrapper">
-                <input type="text" id="char-search-input" placeholder="Buscar personaje para deducir...">
+                <input type="text" id="dbdle-search" placeholder="Escribe aquí..." autocomplete="off">
                 <div id="autocomplete-list" class="autocomplete-items hidden"></div>
             </div>
+
+            <div class="dbdle-legend">
+                <span><div class="legend-box match"></div> Correcto</span>
+                <span><div class="legend-box wrong"></div> Incorrecto</span>
+            </div>
+
             <div class="dbdle-table">
                 <div class="dbdle-header">
-                    <div>Sujeto</div><div>Rol</div><div>Género</div><div>Velocidad</div><div>Año</div>
+                    <div>Sujeto</div>
+                    <div>Género</div>
+                    <div>Velocidad</div>
+                    <div>Año de salida</div>
                 </div>
-                <div id="guesses-grid" class="guesses-grid"></div>
+                <div id="guesses-grid" class="guesses-grid">
+                    </div>
             </div>
         </div>
+
     </div>
-    <script src="app.js"></script>
+
+    <div id="victory-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 style="color: #4caf50; margin-bottom: 15px;">¡CORRECTO!</h2>
+            <img id="victory-img" src="" alt="Personaje" style="width: 150px; border-radius: 8px; margin-bottom: 15px;">
+            <h3 id="victory-name" style="color: white; margin-bottom: 20px;">Nombre</h3>
+            <button onclick="document.getElementById('victory-modal').classList.add('hidden')" class="tab-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="app.js?v=3.0"></script>
 </body>
 </html>
