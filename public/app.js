@@ -49,7 +49,6 @@ const hatchBtn = document.getElementById('hatch-btn');
 
 // Modo Clásico UI
 const wordDisplay = document.getElementById('word-display');
-const hintDisplay = document.getElementById('hint');
 const keyboard = document.getElementById('keyboard');
 
 // Modo Archivos UI
@@ -105,23 +104,33 @@ async function startGameMode(mode) {
 
 async function fetchAllCharacters() {
     try {
-        let endpoint = '/api/all';
-        if (currentMode === 'killer') endpoint = '/api/killers';
-        if (currentMode === 'survivor') endpoint = '/api/survivors';
-        const response = await fetch(endpoint);
-        availableCharacters = await response.json();
+        // Descargamos ambas bases de datos por separado para inyectarles su Rol automáticamente
+        const kRes = await fetch('/api/killers');
+        const kData = await kRes.json();
+        kData.forEach(item => item.rol = "Asesino");
+
+        const sRes = await fetch('/api/survivors');
+        const sData = await sRes.json();
+        sData.forEach(item => item.rol = "Superviviente");
+
+        const allCombined = [...kData, ...sData];
+
+        if (currentMode === 'killer') availableCharacters = [...kData];
+        else if (currentMode === 'survivor') availableCharacters = [...sData];
+        else availableCharacters = [...allCombined];
         
-        if(fullRoster.length === 0) {
-            const allRes = await fetch('/api/all');
-            fullRoster = await allRes.json();
-            fullRoster.sort((a, b) => a.name.localeCompare(b.name));
-        }
-    } catch (error) { hintDisplay.innerText = "Error de conexión con la Entidad."; }
+        // Llenamos el catálogo de búsqueda una sola vez
+        fullRoster = [...allCombined];
+        fullRoster.sort((a, b) => a.name.localeCompare(b.name));
+
+    } catch (error) {
+        document.getElementById('hint').innerText = "Error de conexión con la Entidad.";
+    }
 }
 
 function nextRound() {
     if (availableCharacters.length === 0) {
-        hintDisplay.innerText = "¡Has descubierto todos los secretos! Reiniciando la niebla...";
+        document.getElementById('hint').innerText = "¡Has descubierto todos los secretos! Reiniciando la niebla...";
         fetchAllCharacters().then(() => selectRandomCharacter());
     } else { selectRandomCharacter(); }
 }
@@ -141,14 +150,17 @@ function initGame() {
     hatchBtn.classList.add('hidden'); restartBtn.classList.add('hidden'); menuBtn.classList.add('hidden'); killerImage.classList.add('hidden'); 
     heartbeatAudio.pause(); heartbeatAudio.currentTime = 0;
     
+    const classicContainer = document.getElementById('classic-hangman-ui');
+
     if(currentMode === 'archive') {
-        wordDisplay.classList.add('hidden'); keyboard.classList.add('hidden'); hintDisplay.classList.add('hidden');
+        classicContainer.classList.add('hidden');
         archiveUi.classList.remove('hidden');
         searchInput.value = ""; autocompleteList.innerHTML = ""; autocompleteList.classList.add('hidden'); guessesGrid.innerHTML = "";
         searchInput.disabled = false;
     } else {
-        archiveUi.classList.add('hidden'); wordDisplay.classList.remove('hidden'); keyboard.classList.remove('hidden'); hintDisplay.classList.remove('hidden');
-        hintDisplay.innerText = `Pista: "${currentCharacterData.hint}"`;
+        archiveUi.classList.add('hidden'); 
+        classicContainer.classList.remove('hidden');
+        document.getElementById('hint').innerText = `Pista: "${currentCharacterData.hint}"`;
         
         if (perks.djv) {
             let cleanName = currentCharacterData.name.split(' ').join('');
@@ -173,7 +185,18 @@ searchInput.addEventListener('input', function() {
 
     filtered.forEach(item => {
         const div = document.createElement('div');
-        div.innerHTML = `<img src="${item.image}" alt=""> <span>${item.name}</span>`;
+        div.className = "autocomplete-item";
+        
+        const badgeClass = item.rol === "Asesino" ? "tag-killer" : "tag-survivor";
+
+        div.innerHTML = `
+            <div class="autocomplete-item-left">
+                <img src="${item.image}" alt="">
+                <span>${item.name}</span>
+            </div>
+            <span class="role-tag ${badgeClass}">${item.rol}</span>
+        `;
+
         div.addEventListener('click', () => {
             searchInput.value = "";
             autocompleteList.classList.add('hidden');
@@ -191,22 +214,26 @@ function evaluateDbdleGuess(guessedChar) {
     const row = document.createElement('div');
     row.className = 'guess-row';
 
-    // 1. CELDA NOMBRE E IMAGEN
+    // 1. Nombre
     const nameCell = document.createElement('div'); nameCell.className = 'guess-cell name-cell';
     nameCell.innerHTML = `<img src="${guessedChar.image}" alt=""> <span>${guessedChar.name}</span>`;
 
-    // 2. CELDA GÉNERO
+    // 2. Rol
+    const roleCell = document.createElement('div'); roleCell.className = 'guess-cell';
+    roleCell.innerText = guessedChar.rol || "Desconocido";
+    if (guessedChar.rol === target.rol) roleCell.classList.add('match'); else roleCell.classList.add('wrong');
+
+    // 3. Género
     const genderCell = document.createElement('div'); genderCell.className = 'guess-cell';
     genderCell.innerText = guessedChar.gender || "N/A";
     if (guessedChar.gender === target.gender) genderCell.classList.add('match'); else genderCell.classList.add('wrong');
 
-    // 3. CELDA VELOCIDAD
+    // 4. Velocidad
     const speedCell = document.createElement('div'); speedCell.className = 'guess-cell';
     speedCell.innerText = guessedChar.speed || "N/A";
-    const gSpeed = parseFloat(guessedChar.speed) || 0; const tSpeed = parseFloat(target.speed) || 0;
-    if (gSpeed === tSpeed) speedCell.classList.add('match'); else speedCell.classList.add('wrong');
+    if (guessedChar.speed === target.speed) speedCell.classList.add('match'); else speedCell.classList.add('wrong');
 
-    // 4. CELDA AÑO CON FLECHA INTELIGENTE
+    // 5. Año
     const yearCell = document.createElement('div'); yearCell.className = 'guess-cell';
     const gYear = parseInt(guessedChar.year) || 0; const tYear = parseInt(target.year) || 0;
     
@@ -218,7 +245,12 @@ function evaluateDbdleGuess(guessedChar) {
         yearCell.innerHTML = `${guessedChar.year} <span class="arrow-symbol">↓</span>`; yearCell.classList.add('wrong');
     }
 
-    row.appendChild(nameCell); row.appendChild(genderCell); row.appendChild(speedCell); row.appendChild(yearCell);
+    row.appendChild(nameCell); 
+    row.appendChild(roleCell); 
+    row.appendChild(genderCell); 
+    row.appendChild(speedCell); 
+    row.appendChild(yearCell);
+    
     guessesGrid.insertBefore(row, guessesGrid.firstChild); 
 
     if(!isMuted) { hitSound.currentTime = 0; hitSound.play().catch(e=>{}); }
@@ -280,7 +312,8 @@ hatchBtn.onclick = () => {
     hatchBtn.classList.add('hidden'); gameArea.classList.remove('terror-radius-1', 'terror-radius-2'); heartbeatAudio.pause();
     if (Math.random() <= 0.3) {
         if(!isMuted) hatchSound.play().catch(e=>{});
-        archiveUi.classList.add('hidden'); wordDisplay.classList.remove('hidden');
+        archiveUi.classList.add('hidden'); 
+        document.getElementById('classic-hangman-ui').classList.remove('hidden');
         wordDisplay.innerHTML = `<h2 style='color: #4fc3f7;'>¡ESCAPASTE POR LA TRAMPILLA!</h2>`;
         checkRitual('hatch'); scoreDisplay.innerText = currentRunScore;
         killerImage.src = currentCharacterData.image; killerImage.classList.remove('hidden');
@@ -306,7 +339,12 @@ function renderKeyboard() {
 
 function gameOver(isWin) {
     gameArea.classList.remove('terror-radius-1', 'terror-radius-2');
-    hatchBtn.classList.add('hidden'); archiveUi.classList.add('hidden'); wordDisplay.classList.remove('hidden');
+    hatchBtn.classList.add('hidden'); 
+    
+    const classicContainer = document.getElementById('classic-hangman-ui');
+    archiveUi.classList.add('hidden'); 
+    classicContainer.classList.remove('hidden');
+    
     keyboard.innerHTML = ""; heartbeatAudio.pause();
     killerImage.src = currentCharacterData.image; killerImage.classList.remove('hidden');
 
@@ -321,7 +359,7 @@ function gameOver(isWin) {
         if (mistakes === 0) checkRitual('perfect'); if (mistakes === 5) checkRitual('clutch');
     } else {
         totalLives--; livesLeftDisplay.innerText = totalLives;
-        wordDisplay.innerHTML = `<h2 style='color: #d32f2f;'>Era: ${currentCharacterData.name}</h2>`;
+        wordDisplay.innerHTML = `<h2 style='color: #d32f2f;'>Era: ${currentCharacterData.name} (${currentCharacterData.rol})</h2>`;
         if (totalLives <= 0) { setTimeout(showFinalGameOver, 1500); return; }
     }
     restartBtn.classList.remove('hidden'); menuBtn.classList.remove('hidden');
