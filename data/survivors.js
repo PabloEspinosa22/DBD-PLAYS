@@ -12,7 +12,7 @@ const survivors = [
         hint: "Una espía corporativa experta que, mientras escapaba de la destrucción en Raccoon City, fue envuelta por una misteriosa niebla negra.", 
         image: "img/ada.png",
         speed: "4.0 m/s",
-        year: "1998 (Videojuego)",
+        year: "2022",
         gender: "Femenino"
     },
     { 
@@ -28,7 +28,7 @@ const survivors = [
         hint: "Un escritor atrapado en el Lugar Oscuro. El Ente lo sacó de su interminable bucle de pesadillas para llevarlo a un nuevo infierno.", 
         image: "img/alan.png",
         speed: "4.0 m/s",
-        year: "2010 (Videojuego)",
+        year: "2024",
         gender: "Masculino"
     },
     { 
@@ -36,7 +36,7 @@ const survivors = [
         hint: "Tras luchar contra los demonios del Necronomicón en una cabaña, un portal lo arrastró directamente hacia el Reino del Ente.", 
         image: "img/ash.png",
         speed: "4.0 m/s",
-        year: "1981 (Cine)",
+        year: "2019",
         gender: "Masculino"
     },
     { 
@@ -44,7 +44,7 @@ const survivors = [
         hint: "Un veterano de guerra que se sacrificó por su equipo durante el apocalipsis zombi, despertando en la fogata en lugar de morir.", 
         image: "img/bill.png",
         speed: "4.0 m/s",
-        year: "2008 (Videojuego)",
+        year: "2017",
         gender: "Masculino"
     },
     { 
@@ -52,7 +52,7 @@ const survivors = [
         hint: "Una joven con conexiones a fuerzas oscuras que, tras sobrevivir a los horrores de Silent Hill, fue reclamada por el Ente.", 
         image: "img/cheryl.png",
         speed: "4.0 m/s",
-        year: "2003 (Videojuego)",
+        year: "2020",
         gender: "Femenino"
     },
     { 
@@ -76,7 +76,7 @@ const survivors = [
         hint: "Un chico de Hawkins con una mente brillante y una gorra icónica, arrastrado a la niebla por su conexión con el Mundo del Revés.", 
         image: "img/dustin.png",
         speed: "4.0 m/s",
-        year: "2016 (Serie de TV)",
+        year: "2019",
         gender: "Masculino"
     },
     { 
@@ -92,7 +92,7 @@ const survivors = [
         hint: "Una teniente espacial curtida en supervivencia que fue arrebatada por el Ente desde las frías y oscuras profundidades del espacio.", 
         image: "img/ellen.png",
         speed: "4.0 m/s (Paso ligero)",
-        year: "1979 (Cine)",
+        year: "2023",
         gender: "Femenino"
     },
     { 
@@ -164,7 +164,7 @@ const survivors = [
         hint: "Una agente experta de S.T.A.R.S. que fue secuestrada por la niebla negra justo cuando intentaba escapar de un arma biológica imparable.", 
         image: "img/jill.png",
         speed: "4.0 m/s",
-        year: "1996 (Videojuego)",
+        year: "2021",
         gender: "Femenino"
     },
     { 
@@ -188,7 +188,7 @@ const survivors = [
         hint: "Un superviviente metódico que desapareció en las sombras mientras buscaba respuestas a un misterio que consumió a su familia.", 
         image: "img/kwon.png",
         speed: "4.0 m/s",
-        year: "Desconocido (Original)",
+        year: "Original",
         gender: "Masculino"
     },
     { 
@@ -196,7 +196,7 @@ const survivors = [
         hint: "Una legendaria saqueadora de tumbas que, tras quedar atrapada en el derrumbe de unas antiguas ruinas, fue reclamada por la oscuridad.", 
         image: "img/lara.png",
         speed: "4.0 m/s (Sutileza)",
-        year: "1996 (Videojuego)",
+        year: "2024",
         gender: "Femenino"
     },
     { 
@@ -204,7 +204,7 @@ const survivors = [
         hint: "La chica final original. Mientras luchaba por su vida contra la maldad encarnada en la noche de Halloween, la niebla los tragó a ambos.", 
         image: "img/laurie.png",
         speed: "4.0 m/s",
-        year: "1978 (Cine)",
+        year: "2016",
         gender: "Femenino"
     },
     { 
@@ -220,7 +220,7 @@ const survivors = [
         hint: "Un policía novato que sobrevivió al infierno en su primer día en Raccoon City, solo para ser trasladado a un infierno aún peor.", 
         image: "img/leon.png",
         speed: "4.0 m/s",
-        year: "1998 (Videojuego)",
+        year: "2021",
         gender: "Masculino"
     },
     { 
@@ -236,7 +236,7 @@ const survivors = [
         hint: "Una guerrera letal que, tras sobrevivir incontables días en el apocalipsis zombi, caminó directo hacia una espesa y antinatural niebla.", 
         image: "img/michonne.png",
         speed: "4.0 m/s",
-        year: "2012 (Cómics)",
+        year: "2012",
         gender: "Femenino"
     },
     { 
@@ -252,7 +252,7 @@ const survivors = [
         hint: "Una aspirante a periodista que, al adentrarse en los misterios del Laboratorio Nacional de Hawkins, fue arrastrada a este oscuro reino.", 
         image: "img/nancy.png",
         speed: "4.0 m/s (Fijación)",
-        year: "2016 (Serie de TV)",
+        year: "2019",
         gender: "Femenino"
     },
     { 
@@ -268,7 +268,7 @@ const survivors = [
         hint: "Un legendario actor que pronunció unas líneas de un guion maldito con demasiada convicción, invocando a la Entidad en pleno set de grabación.", 
         image: "img/nicolas.png",
         speed: "4.0 m/s (Dramaturgia)",
-        year: "1982 (Cine)",
+        year: "2023",
         gender: "Masculino"
     },
     { 
@@ -276,7 +276,7 @@ const survivors = [
         hint: "Una joven con habilidades telequinéticas. Su poderosa conexión psíquica con el Mundo del Revés atrajo la mirada hambrienta de la Entidad.", 
         image: "img/once.png",
         speed: "4.0 m/s",
-        year: "2016 (Serie de TV)",
+        year: "2019",
         gender: "Femenino"
     },
     { 
@@ -284,7 +284,7 @@ const survivors = [
         hint: "Desapareció en las sombras mientras intentaba huir desesperadamente de una misteriosa secta, despertando aterrada junto a la fogata.", 
         image: "img/orela.png",
         speed: "4.0 m/s",
-        year: "Desconocido (Original)",
+        year: "Original",
         gender: "Femenino"
     },
     { 
@@ -292,7 +292,7 @@ const survivors = [
         hint: "Un grupo de bardos aventureros que, durante una de sus misiones en tierras de fantasía, fueron transportados por una niebla mágica directamente al Reino del Ente.", 
         image: "img/compañia.png",
         speed: "4.0 m/s",
-        year: "1974 (Juego de Rol)",
+        year: "2024",
         gender: "Mixto"
     },
     { 
@@ -300,7 +300,7 @@ const survivors = [
         hint: "Un joven atrapado en el Mundo de los Sueños. Cuando creyó que no podía despertar de su pesadilla, el Ente lo reclamó.", 
         image: "img/quentin.png",
         speed: "4.0 m/s",
-        year: "2010 (Cine)",
+        year: "2017",
         gender: "Masculino"
     },
     { 
@@ -308,7 +308,7 @@ const survivors = [
         hint: "Una médica prodigio de S.T.A.R.S. que sobrevivió a los horrores de las montañas Arklay, pero no pudo escapar de las garras de la niebla.", 
         image: "img/rebecca.png",
         speed: "4.0 m/s",
-        year: "1996 (Videojuego)",
+        year: "2022",
         gender: "Femenino"
     },
     { 
@@ -324,7 +324,7 @@ const survivors = [
         hint: "Un líder implacable que despertó en un mundo desolado. Guiando a su grupo en busca de un refugio, fue devorado por una extraña tormenta.", 
         image: "img/rick.png",
         speed: "4.0 m/s",
-        year: "2003 (Cómics)",
+        year: "2003",
         gender: "Masculino"
     },
     { 
@@ -340,7 +340,7 @@ const survivors = [
         hint: "Un ex-chico popular convertido en niñero valiente. Fue absorbido por la niebla mientras protegía a sus amigos de fuerzas interdimensionales.", 
         image: "img/steve.png",
         speed: "4.0 m/s",
-        year: "2016 (Serie de TV)",
+        year: "2019",
         gender: "Masculino"
     },
     { 
@@ -348,7 +348,7 @@ const survivors = [
         hint: "Un detective obsesionado. Justo cuando se desangraba en el suelo tras recibir un disparo investigando a Jigsaw, la Entidad se lo llevó.", 
         image: "img/tapp.png",
         speed: "4.0 m/s (Tenacidad)",
-        year: "2004 (Cine)",
+        year: "2018",
         gender: "Masculino"
     },
     { 
@@ -356,7 +356,7 @@ const survivors = [
         hint: "Atrapada por la niebla negra y arrastrada hacia la fogata tras perderse irremediablemente en un denso bosque durante una tormenta.", 
         image: "img/taurie.png",
         speed: "4.0 m/s",
-        year: "Desconocido (Original)",
+        year: "Original",
         gender: "Femenino"
     },
     { 
@@ -372,7 +372,7 @@ const survivors = [
         hint: "Un cazador implacable. Mientras erradicaba las fuerzas de la noche, la niebla lo reclamó junto con el mismísimo Señor Oscuro.", 
         image: "img/trevor.png",
         speed: "4.0 m/s",
-        year: "1989 (Videojuego)",
+        year: "2024",
         gender: "Masculino"
     },
     { 
@@ -380,7 +380,7 @@ const survivors = [
         hint: "Una viajera solitaria cuya caravana fue envuelta repentinamente por una gélida y sobrenatural niebla negra a mitad de la carretera.", 
         image: "img/vee.png",
         speed: "4.0 m/s",
-        year: "Desconocido (Original)",
+        year: "Original",
         gender: "Femenino"
     },
     { 
@@ -396,7 +396,7 @@ const survivors = [
         hint: "Un biólogo marino marcado por una maldición familiar. Viajó en barco buscando curar su pasado y terminó navegando directo a la oscuridad.", 
         image: "img/yoichi.png",
         speed: "4.0 m/s",
-        year: "1998 (Cine)",
+        year: "2022",
         gender: "Masculino"
     },
     { 

@@ -259,7 +259,7 @@ const killers = [
         name: "EL XENOMORFO", 
         hint: "Un alienígena perfecto que viaja por túneles subterráneos y ataca letalmente con su cola.", 
         image: "img/xenomorfo.png",
-        speed: "4.6 m/s (Gateando en túneles: 9.0 m/s)",
+        speed: "4.6 m/s (Gateando: 9.0 m/s)",
         year: "2023",
         gender: "Sin género (Alien)"
     },
@@ -296,6 +296,14 @@ const killers = [
         gender: "Masculino"
     },
     { 
+        name: "LA ADIESTRADORA", 
+        hint: "Va acompañada de su enorme y leal sabueso, el cual puede enviar a rastrear, perseguir y arrastrar a los supervivientes por el suelo.", 
+        image: "img/adiestradora.png",
+        speed: "4.6 m/s",
+        year: "2024",
+        gender: "Femenino"
+    },
+    { 
         name: "VECNA", 
         hint: "Una entidad del Mundo del Revés que atormenta a sus víctimas con sus traumas del pasado, anunciando su maldición con el sonido de un viejo reloj de péndulo.", 
         image: "img/vecna.png",
@@ -313,7 +321,7 @@ const killers = [
     },
     { 
         name: "LA KRASUE", 
-        hint: "Un espíritu maldito del sudeste asiático que se manifiesta como una cabeza flotante con sus vísceras colgando. Condenada por una traición en su vida humana, el Ente la arrastró a la niebla para saciar su eterno e insaciable hambre de carne y sangre.", 
+        hint: "Un espíritu maldito del sudeste asiático que se manifiesta como una cabeza flotante con sus vísceras colgando. Condenada por una traición, el Ente la arrastró a la niebla.", 
         image: "img/krasue.png",
         speed: "4.6 m/s (Flotando)",
         year: "Folclore Tradicional",
@@ -321,9 +329,9 @@ const killers = [
     },
     { 
         name: "KANEKI", 
-        hint: "Un joven convertido en híbrido de ghoul tras un trágico trasplante. Consumido por la locura tras brutales torturas y aceptando su naturaleza caníbal, desató su letal Kagune de ciempiés justo antes de que la niebla negra del Ente lo reclamara como cazador.", 
+        hint: "Un joven convertido en híbrido de ghoul tras un trágico trasplante. Consumido por la locura, desató su letal Kagune de ciempiés justo antes de ser reclamado.", 
         image: "img/kaneki.png",
-        speed: "4.6 m/s (Kagune desatado: 5.2 m/s)",
+        speed: "4.6 m/s (Kagune: 5.2 m/s)",
         year: "2011 (Manga)",
         gender: "Masculino"
     }
