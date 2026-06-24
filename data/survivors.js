@@ -188,7 +188,7 @@ const survivors = [
         hint: "Un superviviente metódico que desapareció en las sombras mientras buscaba respuestas a un misterio que consumió a su familia.", 
         image: "img/kwon.png",
         speed: "4.0 m/s",
-        year: "Original",
+        year: "2026",
         gender: "Masculino"
     },
     { 
@@ -284,7 +284,7 @@ const survivors = [
         hint: "Desapareció en las sombras mientras intentaba huir desesperadamente de una misteriosa secta, despertando aterrada junto a la fogata.", 
         image: "img/orela.png",
         speed: "4.0 m/s",
-        year: "Original",
+        year: "2025",
         gender: "Femenino"
     },
     { 
@@ -356,7 +356,7 @@ const survivors = [
         hint: "Atrapada por la niebla negra y arrastrada hacia la fogata tras perderse irremediablemente en un denso bosque durante una tormenta.", 
         image: "img/taurie.png",
         speed: "4.0 m/s",
-        year: "Original",
+        year: "2024",
         gender: "Femenino"
     },
     { 

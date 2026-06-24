@@ -308,7 +308,7 @@ const killers = [
         hint: "Una entidad del Mundo del Revés que atormenta a sus víctimas con sus traumas del pasado, anunciando su maldición con el sonido de un viejo reloj de péndulo.", 
         image: "img/vecna.png",
         speed: "4.6 m/s",
-        year: "2022 (Serie de TV)",
+        year: "2026",
         gender: "Masculino"
     },
     { 
@@ -316,7 +316,7 @@ const killers = [
         hint: "Un asesino implacable e inmortal que acecha los alrededores de Crystal Lake con una máscara de hockey, guiado por la voz incorpórea de su madre.", 
         image: "img/jason.png",
         speed: "4.6 m/s",
-        year: "1980 (Cine)",
+        year: "2026",
         gender: "Masculino"
     },
     { 
@@ -324,7 +324,7 @@ const killers = [
         hint: "Un espíritu maldito del sudeste asiático que se manifiesta como una cabeza flotante con sus vísceras colgando. Condenada por una traición, el Ente la arrastró a la niebla.", 
         image: "img/krasue.png",
         speed: "4.6 m/s (Flotando)",
-        year: "Folclore Tradicional",
+        year: "2025",
         gender: "Femenino"
     },
     { 
@@ -332,7 +332,7 @@ const killers = [
         hint: "Un joven convertido en híbrido de ghoul tras un trágico trasplante. Consumido por la locura, desató su letal Kagune de ciempiés justo antes de ser reclamado.", 
         image: "img/kaneki.png",
         speed: "4.6 m/s (Kagune: 5.2 m/s)",
-        year: "2011 (Manga)",
+        year: "2025",
         gender: "Masculino"
     }
 ];
