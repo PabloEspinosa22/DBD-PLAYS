@@ -3,34 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DbD - Los Archivos</title>
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <title>El Reino del Ente - Hub</title>
+    <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
-    <header class="main-header">
-        <h1>REINO DEL ENTE</h1>
-        <div class="tabs">
-            <button onclick="showCatalog('killer')" class="tab-btn">Catálogo Asesinos</button>
-            <button onclick="showCatalog('survivor')" class="tab-btn">Catálogo Supervivientes</button>
-            <button onclick="startDbdle('killer')" class="dbdle-btn">Jugar: Asesino</button>
-            <button onclick="startDbdle('survivor')" class="dbdle-btn">Jugar: Superviviente</button>
-        </div>
-    </header>
-
-    <div class="container">
+    <button id="mute-btn" class="mute-btn" onclick="toggleMute()">🔊 Sonido: ON</button>
+    
+    <!-- ================= MENÚ PRINCIPAL (LA FOGATA) ================= -->
+    <div class="menu-container" id="main-menu">
+        <h1 class="main-title">EL REINO DEL ENTE</h1>
         
-        <div id="catalog-view">
-            <div class="search-container">
-                <input type="text" id="catalog-search" placeholder="Buscar en el catálogo..." onkeyup="filterCatalog()">
-            </div>
-            <div id="catalog-grid" class="grid-container"></div>
+        <div class="player-profile">
+            <h2 id="rank-display" class="rank-text">Rango: Ceniza</h2>
+            <p class="bp-text">Puntos de Sangre: <span id="total-bp">0</span></p>
         </div>
 
-        <div id="dbdle-view" class="hidden">
-            <h2 id="dbdle-title" class="mode-title">¿ADIVINAS EL PERSONAJE DE HOY?</h2>
-            
+        <div class="ritual-box">
+            <h3>Ritual Diario</h3>
+            <p id="ritual-desc">Cargando ritual...</p>
+        </div>
+
+        <div class="perks-store">
+            <h3>Red de Sangre (Comprar Ventajas)</h3>
+            <div class="perks-buttons">
+                <button id="btn-djv" class="perk-btn" onclick="buyPerk('djv', 3000)">Déjà Vu (3000 PB)</button>
+                <button id="btn-bbq" class="perk-btn" onclick="buyPerk('bbq', 4000)">Barbacoa y Chile (4000 PB)</button>
+                <button id="btn-dh" class="perk-btn" onclick="buyPerk('dh', 5000)">Fajador (5000 PB)</button>
+            </div>
+            <p id="perk-msg" class="perk-msg"></p>
+        </div>
+
+        <div class="hub-sections">
+            <div class="hub-box">
+                <p class="section-label">MODO CLÁSICO: EL AHORCADO</p>
+                <button class="mode-btn killer-btn" onclick="launchHangman('killer')">Asesinos</button>
+                <button class="mode-btn survivor-btn" onclick="launchHangman('survivor')">Supervivientes</button>
+                <button class="mode-btn all-btn" onclick="launchHangman('all')">Todo el Reino</button>
+            </div>
+
+            <div class="hub-box">
+                <p class="section-label">MODO DEDUCCIÓN: DBDLE</p>
+                <button class="mode-btn dbdle-k-btn" onclick="launchDbdle('killer')">Adivinar Asesino</button>
+                <button class="mode-btn dbdle-s-btn" onclick="launchDbdle('survivor')">Adivinar Superviviente</button>
+            </div>
+
+            <div class="hub-box">
+                <p class="section-label">BASE DE DATOS</p>
+                <button class="mode-btn catalog-btn" onclick="launchCatalog('killer')">Ver Catálogo de Personajes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ZONA DE ACCIÓN (JUEGOS Y CATÁLOGO) ================= -->
+    <div class="game-container hidden" id="game-area">
+        <button class="return-hub-btn" onclick="returnToHub()">🔥 Volver a la Fogata</button>
+        
+        <!-- Cabecera de estadísticas de partida (Oculta en catálogo) -->
+        <div id="game-stats-header">
+            <h2 id="game-area-title">Modo de Juego</h2>
+            <div class="score-board">
+                PB Ganados: <span id="score">0</span> | Vidas: <span id="lives-left">3</span>
+            </div>
+            <p class="status">Errores permitidos: <span id="mistakes-left">6</span></p>
+        </div>
+
+        <!-- 1. SUB-VISTA: AHORCADO CLÁSICO -->
+        <div id="classic-hangman-ui" class="hidden">
+            <p id="hint" class="hint">Cargando pista...</p>
+            <div id="word-display" class="word-display"></div>
+            <div id="keyboard" class="keyboard"></div>
+            <button id="hatch-btn" class="hatch-btn hidden">¡BUSCAR TRAMPILLA!</button>
+            <img id="killer-image" class="killer-img hidden" src="" alt="Personaje">
+            <div class="action-buttons">
+                <button id="restart-btn" class="hidden btn-primary" onclick="nextHangmanRound()">Siguiente Sujeto</button>
+            </div>
+        </div>
+
+        <!-- 2. SUB-VISTA: DBDLE (LOS ARCHIVOS) -->
+        <div id="archive-ui" class="hidden archive-dbdle-container">
             <div class="dbdle-input-wrapper">
-                <input type="text" id="dbdle-search" placeholder="Escribe aquí..." autocomplete="off">
+                <input type="text" id="dbdle-search" placeholder="Escribe el nombre aquí..." autocomplete="off">
                 <div id="autocomplete-list" class="autocomplete-items hidden"></div>
             </div>
 
@@ -40,28 +92,54 @@
             </div>
 
             <div class="dbdle-table">
+                <!-- ¡5 COLUMNAS DE PISTA! -->
                 <div class="dbdle-header">
                     <div>Sujeto</div>
+                    <div>Rol</div>
                     <div>Género</div>
                     <div>Velocidad</div>
                     <div>Año de salida</div>
                 </div>
-                <div id="guesses-grid" class="guesses-grid">
-                    </div>
+                <div id="guesses-grid" class="guesses-grid"></div>
             </div>
         </div>
 
+        <!-- 3. SUB-VISTA: CATÁLOGO -->
+        <div id="catalog-view" class="hidden">
+            <div class="catalog-tabs">
+                <button onclick="renderCatalogGrid('killer')" class="tab-btn">Asesinos</button>
+                <button onclick="renderCatalogGrid('survivor')" class="tab-btn">Supervivientes</button>
+            </div>
+            <input type="text" id="catalog-search-input" placeholder="Filtrar catálogo..." onkeyup="filterCatalogLive()">
+            <div id="catalog-grid" class="grid-container"></div>
+        </div>
+
     </div>
 
-    <div id="victory-modal" class="modal hidden">
+    <!-- MODAL FINAL DE DERROTA (AHORCADO) -->
+    <div id="final-game-over-modal" class="modal hidden">
         <div class="modal-content">
-            <h2 style="color: #4caf50; margin-bottom: 15px;">¡CORRECTO!</h2>
-            <img id="victory-img" src="" alt="Personaje" style="width: 150px; border-radius: 8px; margin-bottom: 15px;">
-            <h3 id="victory-name" style="color: white; margin-bottom: 20px;">Nombre</h3>
-            <button onclick="document.getElementById('victory-modal').classList.add('hidden')" class="tab-btn">Cerrar</button>
+            <h2 style="color: #d32f2f; margin-bottom: 15px;">¡LA ENTIDAD TE HA RECLAMADO!</h2>
+            <p style="color: #bbb; margin-bottom: 25px;">Tus errores sellaron tu destino en la niebla.</p>
+            <h3 style="color: #ffca28; margin-bottom: 30px;">Puntos Obtenidos: <span id="final-score">0</span> PB</h3>
+            <button onclick="returnToHub()" class="tab-btn">Aceptar Destino</button>
         </div>
     </div>
 
-    <script src="app.js?v=3.0"></script>
+    <!-- MODAL DE VICTORIA (DBDLE) -->
+    <div id="victory-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 style="color: #4caf50; margin-bottom: 15px;">¡EXPEDIENTE RESUELTO!</h2>
+            <img id="victory-img" src="" alt="Personaje" style="width: 140px; border-radius: 8px; margin-bottom: 15px; border: 2px solid #4caf50;">
+            <h3 id="victory-name" style="color: white; margin-bottom: 5px;">Nombre</h3>
+            <p id="victory-bp-text" style="color: #ffca28; font-weight: bold; margin-bottom: 25px;">+0 PB</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="returnToHub()" class="tab-btn">Volver al Hub</button>
+                <button onclick="restartDbdleSameMode()" class="dbdle-k-btn" style="padding: 10px 20px; border-radius: 4px; border:none; color:white; font-weight:bold;">Siguiente Archivo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=4.0"></script>
 </body>
 </html>

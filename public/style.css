@@ -2,74 +2,136 @@
 
 body {
     background-color: #080808;
-    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('img/fondo.png');
+    background-image: linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.92)), url('img/fondo.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     color: #fff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 20px;
+    min-height: 100vh;
 }
 
 .hidden { display: none !important; }
 
-/* ENCABEZADO Y TABS */
-.main-header { text-align: center; margin-bottom: 30px; }
-.main-header h1 { color: #fff; font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 20px; text-shadow: 2px 2px 4px #000; }
+/* CONTENEDORES PRINCIPALES */
+.menu-container, .game-container {
+    background-color: rgba(16, 16, 16, 0.95);
+    border: 2px solid #b71c1c;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(183, 28, 28, 0.4);
+    position: relative;
+}
 
-.tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.tab-btn, .dbdle-btn { padding: 12px 20px; font-size: 1rem; font-weight: bold; border-radius: 4px; cursor: pointer; border: 1px solid #444; transition: 0.2s; }
-.tab-btn { background-color: #222; color: white; }
-.tab-btn:hover { background-color: #444; }
-.dbdle-btn { background-color: #8b0000; color: white; border-color: #ff3333; }
-.dbdle-btn:hover { background-color: #b71c1c; transform: translateY(-2px); }
+.main-title { color: #d32f2f; font-size: 2.6rem; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 2px 2px 4px #000; }
+#game-area-title { font-size: 2rem; margin-bottom: 10px; color: #fff; }
 
-.container { max-width: 1000px; margin: 0 auto; }
+/* Botón Mute Flotante */
+.mute-btn { position: fixed; top: 20px; right: 20px; background: #111; color: #4caf50; border: 1px solid #4caf50; padding: 10px 15px; border-radius: 5px; cursor: pointer; z-index: 2000; font-weight: bold; transition: 0.3s; }
+.mute-btn.muted { color: #d32f2f; border-color: #d32f2f; }
 
-/* VISTA CATÁLOGO */
-.search-container { display: flex; justify-content: center; margin-bottom: 30px; }
-#catalog-search { width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 25px; border: 2px solid #444; background: #111; color: white; font-size: 1.1rem; outline: none; transition: 0.3s; }
-#catalog-search:focus { border-color: #8b0000; box-shadow: 0 0 15px rgba(139, 0, 0, 0.5); }
+.return-hub-btn { position: absolute; top: 20px; left: 20px; background: #222; color: #ffca28; border: 1px solid #ffca28; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: 0.2s; }
+.return-hub-btn:hover { background: #333; transform: scale(1.05); }
 
-.grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
-.card { background: #161616; padding: 20px 10px; border-radius: 8px; border: 1px solid #333; text-align: center; transition: 0.2s; }
-.card:hover { transform: translateY(-5px); border-color: #666; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-.card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #444; margin-bottom: 15px; }
-.card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #fff; }
-.card p { font-size: 0.9rem; color: #aaa; margin-bottom: 4px; }
+/* HUB: PERFIL Y RED DE SANGRE */
+.player-profile { background: #111; padding: 15px; border-radius: 6px; border: 1px solid #333; margin-bottom: 15px; }
+.rank-text { font-size: 1.4rem; margin-bottom: 5px; font-weight: bold; }
+.bp-text { color: #ffca28; font-size: 1.1rem; font-weight: bold; }
 
-/* VISTA DBDLE (MODO JUEGO) */
-.mode-title { text-align: center; color: #fff; margin-bottom: 30px; font-size: 1.8rem; letter-spacing: 1px; }
+.ritual-box { background: rgba(40, 20, 20, 0.6); border-left: 4px solid #d32f2f; padding: 12px; margin-bottom: 15px; text-align: left; }
+.ritual-box h3 { color: #d32f2f; margin-bottom: 4px; font-size: 1.05rem; }
+#ritual-desc { color: #ccc; font-size: 0.95rem; }
 
-.dbdle-input-wrapper { position: relative; max-width: 500px; margin: 0 auto 20px auto; }
-#dbdle-search { width: 100%; padding: 15px 20px; background-color: #0f0f0f; border: 2px solid #555; border-radius: 6px; color: #fff; font-size: 1.2rem; outline: none; text-align: center; }
-#dbdle-search:focus { border-color: #fff; }
+.perks-store { background: #141414; border: 1px solid #333; padding: 15px; border-radius: 6px; margin-bottom: 25px; }
+.perks-store h3 { color: #90caf9; font-size: 1.05rem; margin-bottom: 10px; }
+.perks-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.perk-btn { background: #222; color: #aaa; border: 1px solid #555; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+.perk-btn:hover { border-color: #fff; color: #fff; }
+.perk-btn.active { background: #1565c0; color: white; border-color: #64b5f6; font-weight: bold; pointer-events: none; }
+.perk-msg { margin-top: 8px; font-size: 0.85rem; color: #4caf50; min-height: 16px; }
 
-.autocomplete-items { position: absolute; top: 100%; left: 0; right: 0; background-color: #1a1a1a; border: 1px solid #555; border-top: none; max-height: 250px; overflow-y: auto; z-index: 1000; }
-.autocomplete-item { padding: 10px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid #333; transition: 0.2s; }
-.autocomplete-item img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; }
-.autocomplete-item:hover { background-color: #333; }
+/* ESTRUCTURA HUB BOTONES */
+.hub-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
+.hub-box { background: rgba(10,10,10,0.8); border: 1px solid #2b2b2b; padding: 15px; border-radius: 6px; display: flex; flex-direction: column; gap: 10px; }
+.section-label { color: #888; font-size: 0.85rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px; }
 
-.dbdle-legend { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; color: #ccc; font-size: 0.9rem; }
-.dbdle-legend span { display: flex; align-items: center; gap: 8px; }
-.legend-box { width: 20px; height: 20px; border-radius: 3px; }
-.legend-box.match { background-color: #1b8a32; }
-.legend-box.wrong { background-color: #c62828; }
+.mode-btn { padding: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; border-radius: 4px; border: 1px solid transparent; transition: 0.2s; color: white; }
+.mode-btn:hover { transform: scale(1.02); filter: brightness(1.1); }
+.killer-btn { background-color: #b71c1c; border-color: #ff3333; }
+.survivor-btn { background-color: #1565c0; border-color: #66b2ff; }
+.all-btn { background-color: #4527a0; border-color: #b388ff; }
+.dbdle-k-btn { background-color: #800000; border-color: #d32f2f; }
+.dbdle-s-btn { background-color: #003366; border-color: #1e88e5; }
+.catalog-btn { background-color: #333; border-color: #777; color: #ffca28; }
 
-/* TABLA DE DEDUCCIÓN EXACTA A LA IMAGEN */
+/* HEADER DE JUEGO */
+.score-board { font-size: 1.1rem; margin-bottom: 6px; color: #ffca28; font-weight: bold; }
+.status { font-size: 0.95rem; margin-bottom: 20px; color: #aaa; }
+#mistakes-left { font-weight: bold; color: #e53935; font-size: 1.15rem; }
+
+/* 1. MODO AHORCADO */
+.hint { font-size: 1.1rem; font-style: italic; background: #111; padding: 12px; border-radius: 5px; margin-bottom: 20px; border-left: 3px solid #666; }
+.word-display { font-size: 2.2rem; letter-spacing: 12px; margin: 25px 0; font-weight: bold; min-height: 50px; word-break: break-word; }
+.keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 600px; margin: 0 auto 20px auto; }
+.keyboard button { width: 42px; height: 42px; font-size: 1.1rem; font-weight: bold; background: #222; color: white; border: 1px solid #555; border-radius: 4px; cursor: pointer; transition: 0.1s; }
+.keyboard button:hover:not(:disabled) { background: #d32f2f; border-color: white; transform: translateY(-2px); }
+.keyboard button:disabled { opacity: 0.25; background: #000; border-color: #222; cursor: not-allowed; }
+
+/* 2. MODO DBDLE (5 COLUMNAS SÓLIDAS) */
+.dbdle-input-wrapper { position: relative; max-width: 450px; margin: 0 auto 20px auto; }
+#dbdle-search { width: 100%; padding: 14px 20px; background: #0f0f0f; border: 2px solid #555; border-radius: 6px; color: #fff; font-size: 1.1rem; outline: none; text-align: center; }
+#dbdle-search:focus { border-color: #ffca28; }
+
+.autocomplete-items { position: absolute; top: 100%; left: 0; right: 0; background: #181818; border: 1px solid #555; border-top: none; max-height: 220px; overflow-y: auto; z-index: 1000; text-align: left; }
+.autocomplete-item { padding: 8px 12px; display: flex; align-items: center; gap: 12px; cursor: pointer; border-bottom: 1px solid #2b2b2b; }
+.autocomplete-item img { width: 36px; height: 36px; border-radius: 4px; object-fit: cover; }
+.autocomplete-item:hover { background: #333; }
+
+.dbdle-legend { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; color: #ccc; font-size: 0.9rem; }
+.dbdle-legend span { display: flex; align-items: center; gap: 6px; }
+.legend-box { width: 16px; height: 16px; border-radius: 3px; }
+
+/* TABLA DBDLE 5 COLUMNAS */
 .dbdle-table { width: 100%; overflow-x: auto; }
-.dbdle-header, .guess-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 8px; align-items: stretch; margin-bottom: 8px; min-width: 600px; }
-.dbdle-header { color: #fff; font-weight: bold; text-align: center; border-bottom: 2px solid #fff; padding-bottom: 10px; margin-bottom: 15px; }
+.dbdle-header, .guess-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1.1fr 0.9fr; gap: 6px; align-items: stretch; margin-bottom: 6px; min-width: 580px; }
+.dbdle-header { color: #aaa; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid #444; padding-bottom: 8px; margin-bottom: 12px; }
 
-.guess-cell { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px 10px; font-weight: bold; font-size: 1rem; text-align: center; border: 1px solid #000; min-height: 80px; box-shadow: inset 0 0 20px rgba(0,0,0,0.3); }
-.name-cell { flex-direction: row; justify-content: flex-start; gap: 15px; background-color: #000; border-color: #444; color: white; padding-left: 15px; }
-.name-cell img { width: 60px; height: 60px; object-fit: cover; border: 1px solid #555; }
+.guess-cell { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 12px 6px; font-weight: bold; font-size: 0.95rem; text-align: center; border: 1px solid rgba(255,255,255,0.05); min-height: 64px; border-radius: 4px; }
+.name-cell { flex-direction: row; justify-content: flex-start; gap: 12px; background: #0a0a0a; border-color: #333; color: white; padding-left: 10px; text-align: left; font-size: 0.9rem; }
+.name-cell img { width: 44px; height: 44px; object-fit: cover; border: 1px solid #555; border-radius: 3px; flex-shrink: 0; }
 
-/* COLORES ESTILO DBDLE */
-.match { background-color: #1b8a32; color: white; border-color: #1b8a32; }
-.wrong { background-color: #c62828; color: white; border-color: #c62828; }
-.arrow-symbol { font-size: 2.5rem; font-weight: 900; line-height: 0.8; margin-top: 5px; color: #000; }
+/* COLORES SÓLIDOS DBDLE */
+.match { background-color: #2e7d32 !important; color: white; }
+.wrong { background-color: #b71c1c !important; color: white; }
+.arrow-symbol { font-size: 1.4rem; font-weight: 900; line-height: 0.7; margin-top: 4px; color: #ffeb3b; }
 
-/* MODAL */
+/* 3. CATÁLOGO */
+.catalog-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.tab-btn { padding: 10px 20px; background: #222; border: 1px solid #555; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; }
+.tab-btn:hover { background: #444; }
+#catalog-search-input { width: 100%; max-width: 400px; padding: 10px 15px; margin-bottom: 25px; background: #111; border: 1px solid #555; border-radius: 4px; color: white; outline: none; }
+
+.grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; max-height: 500px; overflow-y: auto; padding-right: 5px; }
+.card { background: #141414; padding: 15px 10px; border-radius: 6px; border: 1px solid #2b2b2b; text-align: center; }
+.card img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #555; margin-bottom: 10px; }
+.card h3 { font-size: 1rem; color: #fff; margin-bottom: 4px; }
+.card p { font-size: 0.8rem; color: #aaa; }
+
+/* GENERALES Y MODALES */
+.killer-img { max-width: 170px; max-height: 170px; object-fit: cover; border-radius: 8px; border: 2px solid #555; margin: 15px auto; display: block; }
+.btn-primary { padding: 10px 20px; background: #d32f2f; color: white; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; margin-top: 15px; }
+
+.hatch-btn { background: #0288d1; color: white; padding: 12px 24px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; margin: 15px auto; display: block; animation: pulse 1.5s infinite; }
+@keyframes pulse { 50% { transform: scale(1.05); background: #03a9f4; } }
+
+.terror-radius-1 { animation: tSlow 1s infinite; border-color: #ff5252; }
+.terror-radius-2 { animation: tFast 0.4s infinite; border-color: #ff0000; box-shadow: 0 0 40px rgba(255,0,0,0.6); }
+@keyframes tSlow { 50% { transform: scale(1.005); } }
+@keyframes tFast { 50% { transform: scale(1.015); } }
+
 .modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 3000; }
-.modal-content { background: #161616; border: 2px solid #4caf50; padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 0 30px rgba(76, 175, 80, 0.4); }
+.modal-content { background: #141414; border: 2px solid #555; padding: 35px; border-radius: 8px; max-width: 450px; width: 90%; }
