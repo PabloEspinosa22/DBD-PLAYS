@@ -378,6 +378,8 @@ function launchCatalog(initialRole) {
     document.getElementById('roulette-view').classList.add('hidden');
     document.getElementById('catalog-view').classList.remove('hidden');
 
+    if(!isMuted) bgMusic.play().catch(e=>{});
+
     renderCatalogGrid(initialRole);
 }
 
@@ -425,7 +427,8 @@ function launchRoulette() {
     
     document.getElementById('roulette-view').classList.remove('hidden');
 
-    // Inicializar con todos los asesinos la primera vez
+    if(!isMuted) bgMusic.play().catch(e=>{});
+
     if (activeRoulettePool === null) {
         activeRoulettePool = killersList.map(k => k.name);
     }
@@ -452,9 +455,9 @@ function renderRouletteGrid() {
 
 window.toggleRouletteKiller = function(name) {
     if (activeRoulettePool.includes(name)) {
-        activeRoulettePool = activeRoulettePool.filter(n => n !== name); // Quitar
+        activeRoulettePool = activeRoulettePool.filter(n => n !== name); 
     } else {
-        activeRoulettePool.push(name); // Agregar
+        activeRoulettePool.push(name); 
     }
     renderRouletteGrid();
 }
@@ -477,16 +480,13 @@ window.spinRoulette = function() {
     const chosenName = activeRoulettePool[randomIndex];
     const chosenKiller = killersList.find(k => k.name === chosenName);
     
-    // Lo tachamos automáticamente para que no vuelva a salir
     activeRoulettePool = activeRoulettePool.filter(n => n !== chosenName);
     renderRouletteGrid(); 
     
-    // Mostramos resultado
     document.getElementById('roulette-modal-img').src = chosenKiller.image;
     document.getElementById('roulette-modal-name').innerText = chosenKiller.name;
     document.getElementById('roulette-modal').classList.remove('hidden');
 }
-
 
 function checkRitualCompleted(type) {
     if (activeRitual.id === type) {
