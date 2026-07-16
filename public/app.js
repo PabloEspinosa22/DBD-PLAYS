@@ -4,8 +4,8 @@ let survivorsList = [];
 let fullRoster = [];
 
 // --- VARIABLES DE ESTADO DE JUEGO ---
-let activeAppMode = ""; // "hangman", "dbdle", "catalog"
-let activeSubMode = ""; // "killer", "survivor", "all"
+let activeAppMode = ""; 
+let activeSubMode = ""; 
 
 let targetCharacter = null;
 let guessedLetters = [];
@@ -92,6 +92,7 @@ function returnToHub() {
     document.getElementById('game-area').classList.add('hidden');
     document.getElementById('final-game-over-modal').classList.add('hidden');
     document.getElementById('victory-modal').classList.add('hidden');
+    document.getElementById('roulette-modal').classList.add('hidden');
     document.getElementById('main-menu').classList.remove('hidden');
     updateMenuHub();
 }
@@ -118,6 +119,7 @@ function launchHangman(subMode) {
     document.getElementById('classic-hangman-ui').classList.remove('hidden');
     document.getElementById('archive-ui').classList.add('hidden');
     document.getElementById('catalog-view').classList.add('hidden');
+    document.getElementById('roulette-view').classList.add('hidden');
 
     let titleText = (subMode === 'killer') ? "AHORCADO: ASESINOS" : (subMode === 'survivor') ? "AHORCADO: SUPERVIVIENTES" : "AHORCADO: TODO EL REINO";
     document.getElementById('game-area-title').innerText = titleText;
@@ -270,6 +272,7 @@ function launchDbdle(subMode) {
     document.getElementById('archive-ui').classList.remove('hidden');
     document.getElementById('classic-hangman-ui').classList.add('hidden');
     document.getElementById('catalog-view').classList.add('hidden');
+    document.getElementById('roulette-view').classList.add('hidden');
 
     document.getElementById('game-area-title').innerText = (subMode === 'killer') ? "DBDLE: ADIVINAR ASESINO" : "DBDLE: ADIVINAR SUPERVIVIENTE";
     document.getElementById('score').innerText = currentRunScore;
@@ -311,18 +314,13 @@ function evaluateDbdleGuess(guessed) {
     const grid = document.getElementById('guesses-grid');
     const row = document.createElement('div'); row.className = 'guess-row';
 
-    // 1. Nombre
     const cName = `<div class="guess-cell name-cell"><img src="${guessed.image}"><span>${guessed.name}</span></div>`;
-    // 2. Rol
     const isRol = (guessed.rol === targetCharacter.rol) ? 'match' : 'wrong';
     const cRol = `<div class="guess-cell ${isRol}">${guessed.rol}</div>`;
-    // 3. Género
     const isGen = (guessed.gender === targetCharacter.gender) ? 'match' : 'wrong';
     const cGen = `<div class="guess-cell ${isGen}">${guessed.gender || 'N/A'}</div>`;
-    // 4. Velocidad
     const isSpeed = (guessed.speed === targetCharacter.speed) ? 'match' : 'wrong';
     const cSpeed = `<div class="guess-cell ${isSpeed}">${guessed.speed || 'N/A'}</div>`;
-    // 5. Año
     const gY = parseInt(guessed.year) || 0; const tY = parseInt(targetCharacter.year) || 0;
     let yHtml = ""; let isY = "wrong";
     if(gY === tY) { isY = "match"; yHtml = guessed.year; } 
@@ -374,9 +372,10 @@ function launchCatalog(initialRole) {
     document.getElementById('main-menu').classList.add('hidden');
     document.getElementById('game-area').classList.remove('hidden');
     
-    document.getElementById('game-stats-header').classList.add('hidden'); // Ocultar PB y Vidas
+    document.getElementById('game-stats-header').classList.add('hidden'); 
     document.getElementById('classic-hangman-ui').classList.add('hidden');
     document.getElementById('archive-ui').classList.add('hidden');
+    document.getElementById('roulette-view').classList.add('hidden');
     document.getElementById('catalog-view').classList.remove('hidden');
 
     renderCatalogGrid(initialRole);
@@ -407,6 +406,87 @@ window.filterCatalogLive = function() {
     const q = document.getElementById('catalog-search-input').value;
     renderCatalogGrid(activeSubMode, q);
 }
+
+// =========================================================================
+//                         4. RULETA DE ASESINOS
+// =========================================================================
+let activeRoulettePool = null;
+
+function launchRoulette() {
+    activeAppMode = "roulette";
+    
+    document.getElementById('main-menu').classList.add('hidden');
+    document.getElementById('game-area').classList.remove('hidden');
+    
+    document.getElementById('game-stats-header').classList.add('hidden');
+    document.getElementById('classic-hangman-ui').classList.add('hidden');
+    document.getElementById('archive-ui').classList.add('hidden');
+    document.getElementById('catalog-view').classList.add('hidden');
+    
+    document.getElementById('roulette-view').classList.remove('hidden');
+
+    // Inicializar con todos los asesinos la primera vez
+    if (activeRoulettePool === null) {
+        activeRoulettePool = killersList.map(k => k.name);
+    }
+    renderRouletteGrid();
+}
+
+function renderRouletteGrid() {
+    const grid = document.getElementById('roulette-grid');
+    grid.innerHTML = "";
+    
+    killersList.forEach(k => {
+        const isActive = activeRoulettePool.includes(k.name);
+        const disabledClass = isActive ? "" : "disabled";
+        
+        grid.innerHTML += `
+            <div class="roulette-card ${disabledClass}" onclick="toggleRouletteKiller('${k.name}')">
+                <img src="${k.image}" alt="${k.name}">
+                <h4>${k.name}</h4>
+            </div>
+        `;
+    });
+    document.getElementById('roulette-counter').innerText = `${activeRoulettePool.length} / ${killersList.length} Activos`;
+}
+
+window.toggleRouletteKiller = function(name) {
+    if (activeRoulettePool.includes(name)) {
+        activeRoulettePool = activeRoulettePool.filter(n => n !== name); // Quitar
+    } else {
+        activeRoulettePool.push(name); // Agregar
+    }
+    renderRouletteGrid();
+}
+
+window.setAllRoulette = function(state) {
+    if (state) { activeRoulettePool = killersList.map(k => k.name); } 
+    else { activeRoulettePool = []; }
+    renderRouletteGrid();
+}
+
+window.spinRoulette = function() {
+    if (activeRoulettePool.length === 0) {
+        alert("¡No hay asesinos habilitados en la ruleta! Habilita al menos uno haciendo clic en su retrato.");
+        return;
+    }
+    
+    if (!isMuted) { hitSound.currentTime = 0; hitSound.play().catch(e=>{}); }
+    
+    const randomIndex = Math.floor(Math.random() * activeRoulettePool.length);
+    const chosenName = activeRoulettePool[randomIndex];
+    const chosenKiller = killersList.find(k => k.name === chosenName);
+    
+    // Lo tachamos automáticamente para que no vuelva a salir
+    activeRoulettePool = activeRoulettePool.filter(n => n !== chosenName);
+    renderRouletteGrid(); 
+    
+    // Mostramos resultado
+    document.getElementById('roulette-modal-img').src = chosenKiller.image;
+    document.getElementById('roulette-modal-name').innerText = chosenKiller.name;
+    document.getElementById('roulette-modal').classList.remove('hidden');
+}
+
 
 function checkRitualCompleted(type) {
     if (activeRitual.id === type) {

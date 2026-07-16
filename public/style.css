@@ -29,12 +29,12 @@ body {
 
 .main-title { color: #d32f2f; font-size: 2.6rem; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 2px 2px 4px #000; }
 #game-area-title { font-size: 2rem; margin-bottom: 10px; color: #fff; }
+.mode-title { text-align: center; color: #fff; margin-bottom: 25px; font-size: 1.8rem; letter-spacing: 1px; }
 
-/* Botón Mute Flotante */
+/* Botón Mute y Volver */
 .mute-btn { position: fixed; top: 20px; right: 20px; background: #111; color: #4caf50; border: 1px solid #4caf50; padding: 10px 15px; border-radius: 5px; cursor: pointer; z-index: 2000; font-weight: bold; transition: 0.3s; }
 .mute-btn.muted { color: #d32f2f; border-color: #d32f2f; }
-
-.return-hub-btn { position: absolute; top: 20px; left: 20px; background: #222; color: #ffca28; border: 1px solid #ffca28; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: 0.2s; }
+.return-hub-btn { position: absolute; top: 20px; left: 20px; background: #222; color: #ffca28; border: 1px solid #ffca28; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: 0.2s; z-index: 10; }
 .return-hub-btn:hover { background: #333; transform: scale(1.05); }
 
 /* HUB: PERFIL Y RED DE SANGRE */
@@ -67,8 +67,9 @@ body {
 .dbdle-k-btn { background-color: #800000; border-color: #d32f2f; }
 .dbdle-s-btn { background-color: #003366; border-color: #1e88e5; }
 .catalog-btn { background-color: #333; border-color: #777; color: #ffca28; }
+.roulette-btn { background-color: #311b92; border-color: #651fff; color: white; }
 
-/* HEADER DE JUEGO */
+/* HEADER DE JUEGO (AHORCADO / DBDLE) */
 .score-board { font-size: 1.1rem; margin-bottom: 6px; color: #ffca28; font-weight: bold; }
 .status { font-size: 0.95rem; margin-bottom: 20px; color: #aaa; }
 #mistakes-left { font-weight: bold; color: #e53935; font-size: 1.15rem; }
@@ -95,7 +96,6 @@ body {
 .dbdle-legend span { display: flex; align-items: center; gap: 6px; }
 .legend-box { width: 16px; height: 16px; border-radius: 3px; }
 
-/* TABLA DBDLE 5 COLUMNAS */
 .dbdle-table { width: 100%; overflow-x: auto; }
 .dbdle-header, .guess-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1.1fr 0.9fr; gap: 6px; align-items: stretch; margin-bottom: 6px; min-width: 580px; }
 .dbdle-header { color: #aaa; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid #444; padding-bottom: 8px; margin-bottom: 12px; }
@@ -104,14 +104,13 @@ body {
 .name-cell { flex-direction: row; justify-content: flex-start; gap: 12px; background: #0a0a0a; border-color: #333; color: white; padding-left: 10px; text-align: left; font-size: 0.9rem; }
 .name-cell img { width: 44px; height: 44px; object-fit: cover; border: 1px solid #555; border-radius: 3px; flex-shrink: 0; }
 
-/* COLORES SÓLIDOS DBDLE */
 .match { background-color: #2e7d32 !important; color: white; }
 .wrong { background-color: #b71c1c !important; color: white; }
 .arrow-symbol { font-size: 1.4rem; font-weight: 900; line-height: 0.7; margin-top: 4px; color: #ffeb3b; }
 
 /* 3. CATÁLOGO */
 .catalog-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-.tab-btn { padding: 10px 20px; background: #222; border: 1px solid #555; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; }
+.tab-btn { padding: 10px 20px; background: #222; border: 1px solid #555; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.2s; }
 .tab-btn:hover { background: #444; }
 #catalog-search-input { width: 100%; max-width: 400px; padding: 10px 15px; margin-bottom: 25px; background: #111; border: 1px solid #555; border-radius: 4px; color: white; outline: none; }
 
@@ -121,12 +120,29 @@ body {
 .card h3 { font-size: 1rem; color: #fff; margin-bottom: 4px; }
 .card p { font-size: 0.8rem; color: #aaa; }
 
+/* 4. NUEVO: RULETA DE ASESINOS */
+.roulette-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
+.spin-btn { background: #512da8; color: white; border: 2px solid #7e57c2; padding: 15px 30px; font-size: 1.4rem; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 0 20px rgba(81, 45, 168, 0.4); animation: pulseSpin 2s infinite; transition: 0.2s; }
+.spin-btn:hover { background: #651fff; transform: scale(1.05); }
+
+@keyframes pulseSpin { 50% { box-shadow: 0 0 35px rgba(126, 87, 194, 0.8); } }
+
+.roulette-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 25px; max-height: 450px; overflow-y: auto; padding: 10px; }
+.roulette-card { cursor: pointer; transition: 0.2s; text-align: center; width: 85px; }
+.roulette-card img { width: 75px; height: 75px; object-fit: cover; border-radius: 8px; border: 2px solid #7e57c2; transition: 0.3s; }
+.roulette-card h4 { font-size: 0.7rem; color: #fff; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Estilo para asesinos deshabilitados en la ruleta */
+.roulette-card.disabled img { filter: grayscale(100%) opacity(0.3); border-color: #222; }
+.roulette-card.disabled h4 { color: #555; text-decoration: line-through; }
+.roulette-card:hover { transform: scale(1.1); }
+
 /* GENERALES Y MODALES */
 .killer-img { max-width: 170px; max-height: 170px; object-fit: cover; border-radius: 8px; border: 2px solid #555; margin: 15px auto; display: block; }
 .btn-primary { padding: 10px 20px; background: #d32f2f; color: white; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; margin-top: 15px; }
 
-.hatch-btn { background: #0288d1; color: white; padding: 12px 24px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; margin: 15px auto; display: block; animation: pulse 1.5s infinite; }
-@keyframes pulse { 50% { transform: scale(1.05); background: #03a9f4; } }
+.hatch-btn { background: #0288d1; color: white; padding: 12px 24px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; margin: 15px auto; display: block; animation: pulseHatch 1.5s infinite; }
+@keyframes pulseHatch { 50% { transform: scale(1.05); background: #03a9f4; } }
 
 .terror-radius-1 { animation: tSlow 1s infinite; border-color: #ff5252; }
 .terror-radius-2 { animation: tFast 0.4s infinite; border-color: #ff0000; box-shadow: 0 0 40px rgba(255,0,0,0.6); }

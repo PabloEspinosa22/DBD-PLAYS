@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Reino del Ente - Hub</title>
-    <link rel="stylesheet" href="style.css?v=4.0">
+    <link rel="stylesheet" href="style.css?v=5.0">
 </head>
 <body>
     <button id="mute-btn" class="mute-btn" onclick="toggleMute()">🔊 Sonido: ON</button>
@@ -48,17 +48,18 @@
             </div>
 
             <div class="hub-box">
-                <p class="section-label">BASE DE DATOS</p>
-                <button class="mode-btn catalog-btn" onclick="launchCatalog('killer')">Ver Catálogo de Personajes</button>
+                <p class="section-label">BASE DE DATOS Y HERRAMIENTAS</p>
+                <button class="mode-btn catalog-btn" onclick="launchCatalog('killer')">Ver Catálogo General</button>
+                <button class="mode-btn roulette-btn" onclick="launchRoulette()">Ruleta de Asesinos</button>
             </div>
         </div>
     </div>
 
-    <!-- ================= ZONA DE ACCIÓN (JUEGOS Y CATÁLOGO) ================= -->
+    <!-- ================= ZONA DE ACCIÓN ================= -->
     <div class="game-container hidden" id="game-area">
         <button class="return-hub-btn" onclick="returnToHub()">🔥 Volver a la Fogata</button>
         
-        <!-- Cabecera de estadísticas de partida (Oculta en catálogo) -->
+        <!-- Cabecera de estadísticas de partida (Se oculta en herramientas) -->
         <div id="game-stats-header">
             <h2 id="game-area-title">Modo de Juego</h2>
             <div class="score-board">
@@ -67,7 +68,7 @@
             <p class="status">Errores permitidos: <span id="mistakes-left">6</span></p>
         </div>
 
-        <!-- 1. SUB-VISTA: AHORCADO CLÁSICO -->
+        <!-- 1. AHORCADO CLÁSICO -->
         <div id="classic-hangman-ui" class="hidden">
             <p id="hint" class="hint">Cargando pista...</p>
             <div id="word-display" class="word-display"></div>
@@ -79,7 +80,7 @@
             </div>
         </div>
 
-        <!-- 2. SUB-VISTA: DBDLE (LOS ARCHIVOS) -->
+        <!-- 2. DBDLE (LOS ARCHIVOS) -->
         <div id="archive-ui" class="hidden archive-dbdle-container">
             <div class="dbdle-input-wrapper">
                 <input type="text" id="dbdle-search" placeholder="Escribe el nombre aquí..." autocomplete="off">
@@ -92,7 +93,6 @@
             </div>
 
             <div class="dbdle-table">
-                <!-- ¡5 COLUMNAS DE PISTA! -->
                 <div class="dbdle-header">
                     <div>Sujeto</div>
                     <div>Rol</div>
@@ -104,14 +104,31 @@
             </div>
         </div>
 
-        <!-- 3. SUB-VISTA: CATÁLOGO -->
+        <!-- 3. CATÁLOGO -->
         <div id="catalog-view" class="hidden">
+            <h2 class="mode-title">CATÁLOGO DE LA ENTIDAD</h2>
             <div class="catalog-tabs">
                 <button onclick="renderCatalogGrid('killer')" class="tab-btn">Asesinos</button>
                 <button onclick="renderCatalogGrid('survivor')" class="tab-btn">Supervivientes</button>
             </div>
             <input type="text" id="catalog-search-input" placeholder="Filtrar catálogo..." onkeyup="filterCatalogLive()">
             <div id="catalog-grid" class="grid-container"></div>
+        </div>
+
+        <!-- 4. NUEVO: RULETA DE ASESINOS -->
+        <div id="roulette-view" class="hidden">
+            <h2 class="mode-title" style="color: #b388ff;">SELECCIÓN ALEATORIA DE ASESINOS</h2>
+            
+            <div class="roulette-controls">
+                <button onclick="setAllRoulette(true)" class="tab-btn" style="background:#2e7d32;">Habilitar Todos</button>
+                <button onclick="setAllRoulette(false)" class="tab-btn" style="background:#c62828;">Quitar Todos</button>
+            </div>
+            
+            <button class="spin-btn" onclick="spinRoulette()">🎲 ELEGIR AL AZAR</button>
+            <p style="color: #aaa; margin-top: 10px; font-weight: bold;" id="roulette-counter">0 / 0 Activos</p>
+            <p style="color: #666; font-size: 0.85rem; margin-bottom: 20px;">(Haz clic en un asesino para habilitarlo o deshabilitarlo manualmente)</p>
+
+            <div id="roulette-grid" class="roulette-grid"></div>
         </div>
 
     </div>
@@ -140,6 +157,17 @@
         </div>
     </div>
 
-    <script src="app.js?v=4.0"></script>
+    <!-- NUEVO: MODAL DE RESULTADO RULETA -->
+    <div id="roulette-modal" class="modal hidden">
+        <div class="modal-content" style="border-color: #512da8; box-shadow: 0 0 30px rgba(81, 45, 168, 0.6);">
+            <h2 style="color: #b388ff; margin-bottom: 10px;">LA ENTIDAD EXIGE SANGRE</h2>
+            <p style="color: #ccc; margin-bottom: 20px;">Tu siguiente sacrificio será con:</p>
+            <img id="roulette-modal-img" src="" alt="Personaje" style="width: 160px; border-radius: 8px; margin-bottom: 15px; border: 2px solid #b388ff;">
+            <h3 id="roulette-modal-name" style="color: white; margin-bottom: 25px; font-size: 1.8rem; letter-spacing: 1px;">Nombre</h3>
+            <button onclick="document.getElementById('roulette-modal').classList.add('hidden')" class="spin-btn" style="font-size: 1rem; padding: 10px 20px; animation: none;">¡A LA CACERÍA!</button>
+        </div>
+    </div>
+
+    <script src="app.js?v=5.0"></script>
 </body>
 </html>
