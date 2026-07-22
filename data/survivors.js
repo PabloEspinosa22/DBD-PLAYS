@@ -5,7 +5,8 @@ const survivors = [
         image: "img/ace.png",
         speed: "4.0 m/s",
         year: "2016",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Argentino"
     },
     { 
         name: "ADA WONG", 
@@ -13,7 +14,8 @@ const survivors = [
         image: "img/ada.png",
         speed: "4.0 m/s",
         year: "2022",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "China/Estadounidense"
     },
     { 
         name: "ADAM FRANCIS", 
@@ -21,7 +23,8 @@ const survivors = [
         image: "img/adam.png",
         speed: "4.0 m/s",
         year: "2018",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Jamaicano"
     },
     { 
         name: "ALAN WAKE", 
@@ -29,7 +32,8 @@ const survivors = [
         image: "img/alan.png",
         speed: "4.0 m/s",
         year: "2024",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "ASH WILLIAMS", 
@@ -37,7 +41,8 @@ const survivors = [
         image: "img/ash.png",
         speed: "4.0 m/s",
         year: "2019",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "BILL OVERBECK", 
@@ -45,7 +50,8 @@ const survivors = [
         image: "img/bill.png",
         speed: "4.0 m/s",
         year: "2017",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "CHERYL MASON", 
@@ -53,7 +59,8 @@ const survivors = [
         image: "img/cheryl.png",
         speed: "4.0 m/s",
         year: "2020",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "CLAUDETTE MOREL", 
@@ -61,23 +68,26 @@ const survivors = [
         image: "img/claudette.png",
         speed: "4.0 m/s",
         year: "2016",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Canadiense"
     },
     { 
         name: "DAVID KING", 
         hint: "Un ex-luchador rudo de Manchester que, tras una violenta pelea de bar que se salió de control, desapareció sin dejar rastro.", 
         image: "img/david.png",
-        speed: "4.0 m/s (Fajador)",
+        speed: "4.0 m/s",
         year: "2017",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Británico"
     },
     { 
         name: "DUSTIN HENDERSON", 
         hint: "Un chico de Hawkins con una mente brillante y una gorra icónica, arrastrado a la niebla por su conexión con el Mundo del Revés.", 
         image: "img/dustin.png",
         speed: "4.0 m/s",
-        year: "2019",
-        gender: "Masculino"
+        year: "2026",
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "DWIGHT FAIRFIELD", 
@@ -85,15 +95,17 @@ const survivors = [
         image: "img/dwight.png",
         speed: "4.0 m/s",
         year: "2016",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "ELLEN RIPLEY", 
         hint: "Una teniente espacial curtida en supervivencia que fue arrebatada por el Ente desde las frías y oscuras profundidades del espacio.", 
         image: "img/ellen.png",
-        speed: "4.0 m/s (Paso ligero)",
+        speed: "4.0 m/s",
         year: "2023",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "ÉLODIE RAKOTO", 
@@ -101,7 +113,8 @@ const survivors = [
         image: "img/elodie.png",
         speed: "4.0 m/s",
         year: "2020",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Francesa"
     },
     { 
         name: "FELIX RICHTER", 
@@ -109,15 +122,17 @@ const survivors = [
         image: "img/felix.png",
         speed: "4.0 m/s",
         year: "2020",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Alemán"
     },
     { 
         name: "FENG MIN", 
         hint: "Una jugadora de e-sports profesional que, abrumada por la presión y el fracaso, bebió hasta quedarse dormida y despertó en la niebla.", 
         image: "img/feng.png",
-        speed: "4.0 m/s (Agilidad: 6.0 m/s)",
+        speed: "4.0 m/s",
         year: "2017",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "China"
     },
     { 
         name: "GABRIEL SOMA", 
@@ -125,7 +140,8 @@ const survivors = [
         image: "img/gabriel.png",
         speed: "4.0 m/s",
         year: "2023",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Desconocido"
     },
     { 
         name: "HADDIE KAUR", 
@@ -133,7 +149,8 @@ const survivors = [
         image: "img/haddie.png",
         speed: "4.0 m/s",
         year: "2022",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "India"
     },
     { 
         name: "JAKE PARK", 
@@ -141,7 +158,8 @@ const survivors = [
         image: "img/jake.png",
         speed: "4.0 m/s",
         year: "2016",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "JANE ROMERO", 
@@ -149,7 +167,8 @@ const survivors = [
         image: "img/jane.png",
         speed: "4.0 m/s",
         year: "2019",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "JEFF JOHANSEN", 
@@ -157,7 +176,8 @@ const survivors = [
         image: "img/jeff.png",
         speed: "4.0 m/s",
         year: "2018",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Canadiense"
     },
     { 
         name: "JILL VALENTINE", 
@@ -165,15 +185,17 @@ const survivors = [
         image: "img/jill.png",
         speed: "4.0 m/s",
         year: "2021",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "JONAH VASQUEZ", 
         hint: "Un matemático de la CIA que rastreó un misterioso patrón numérico hasta un cementerio en Chile, donde una bandada de cuervos lo rodeó.", 
         image: "img/jonah.png",
-        speed: "4.0 m/s (Superación)",
+        speed: "4.0 m/s",
         year: "2021",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "KATE DENSON", 
@@ -181,7 +203,8 @@ const survivors = [
         image: "img/kate.png",
         speed: "4.0 m/s",
         year: "2018",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "KWON", 
@@ -189,15 +212,17 @@ const survivors = [
         image: "img/kwon.png",
         speed: "4.0 m/s",
         year: "2026",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Coreano"
     },
     { 
         name: "LARA CROFT", 
         hint: "Una legendaria saqueadora de tumbas que, tras quedar atrapada en el derrumbe de unas antiguas ruinas, fue reclamada por la oscuridad.", 
         image: "img/lara.png",
-        speed: "4.0 m/s (Sutileza)",
+        speed: "4.0 m/s",
         year: "2024",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Británica"
     },
     { 
         name: "LAURIE STRODE", 
@@ -205,7 +230,8 @@ const survivors = [
         image: "img/laurie.png",
         speed: "4.0 m/s",
         year: "2016",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "YUN JIN LEE", 
@@ -213,7 +239,8 @@ const survivors = [
         image: "img/lee.png",
         speed: "4.0 m/s",
         year: "2021",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Coreana"
     },
     { 
         name: "LEON KENNEDY", 
@@ -221,23 +248,26 @@ const survivors = [
         image: "img/leon.png",
         speed: "4.0 m/s",
         year: "2021",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "MEG THOMAS", 
         hint: "Una atleta llena de energía que cuidaba a su madre enferma. Salió a correr al bosque para despejar su mente y nunca regresó.", 
         image: "img/meg.png",
-        speed: "4.0 m/s (Impulso de carrera: 6.0 m/s)",
+        speed: "4.0 m/s",
         year: "2016",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "MICHONNE", 
         hint: "Una guerrera letal que, tras sobrevivir incontables días en el apocalipsis zombi, caminó directo hacia una espesa y antinatural niebla.", 
         image: "img/michonne.png",
         speed: "4.0 m/s",
-        year: "2012",
-        gender: "Femenino"
+        year: "2026",
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "MIKAELA REID", 
@@ -245,47 +275,53 @@ const survivors = [
         image: "img/mikaela.png",
         speed: "4.0 m/s",
         year: "2021",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "NANCY WHEELER", 
         hint: "Una aspirante a periodista que, al adentrarse en los misterios del Laboratorio Nacional de Hawkins, fue arrastrada a este oscuro reino.", 
         image: "img/nancy.png",
-        speed: "4.0 m/s (Fijación)",
+        speed: "4.0 m/s",
         year: "2019",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "NEA KARLSSON", 
         hint: "Una grafitera rebelde y solitaria que decidió patinar en el asilo abandonado de Crotus Prenn y se desvaneció en la oscuridad.", 
         image: "img/nea.png",
-        speed: "4.0 m/s (Caída equilibrada)",
+        speed: "4.0 m/s",
         year: "2016",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Sueca"
     },
     { 
         name: "NICOLAS CAGE", 
         hint: "Un legendario actor que pronunció unas líneas de un guion maldito con demasiada convicción, invocando a la Entidad en pleno set de grabación.", 
         image: "img/nicolas.png",
-        speed: "4.0 m/s (Dramaturgia)",
+        speed: "4.0 m/s",
         year: "2023",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "ONCE", 
         hint: "Una joven con habilidades telequinéticas. Su poderosa conexión psíquica con el Mundo del Revés atrajo la mirada hambrienta de la Entidad.", 
         image: "img/once.png",
         speed: "4.0 m/s",
-        year: "2019",
-        gender: "Femenino"
+        year: "2026",
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "ORELA", 
         hint: "Desapareció en las sombras mientras intentaba huir desesperadamente de una misteriosa secta, despertando aterrada junto a la fogata.", 
         image: "img/orela.png",
         speed: "4.0 m/s",
-        year: "2025",
-        gender: "Femenino"
+        year: "2026",
+        gender: "Femenino",
+        origin: "Desconocido"
     },
     { 
         name: "LA COMPANIA", 
@@ -293,7 +329,8 @@ const survivors = [
         image: "img/compañia.png",
         speed: "4.0 m/s",
         year: "2024",
-        gender: "Mixto"
+        gender: "Mixto",
+        origin: "Desconocido"
     },
     { 
         name: "QUENTIN SMITH", 
@@ -301,7 +338,8 @@ const survivors = [
         image: "img/quentin.png",
         speed: "4.0 m/s",
         year: "2017",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "REBECCA CHAMBERS", 
@@ -309,23 +347,26 @@ const survivors = [
         image: "img/rebecca.png",
         speed: "4.0 m/s",
         year: "2022",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "RENATO LYRA", 
         hint: "Un chico brasileño que, junto a su hermana, fue atacado por un macabro dron cibernético en la playa antes de que la niebla los engullera.", 
         image: "img/renato.png",
-        speed: "4.0 m/s (Acelerón de fondo)",
+        speed: "4.0 m/s",
         year: "2023",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Brasileño"
     },
     { 
         name: "RICK GRIMES", 
         hint: "Un líder implacable que despertó en un mundo desolado. Guiando a su grupo en busca de un refugio, fue devorado por una extraña tormenta.", 
         image: "img/rick.png",
         speed: "4.0 m/s",
-        year: "2003",
-        gender: "Masculino"
+        year: "2026",
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "SABLE WARD", 
@@ -333,7 +374,8 @@ const survivors = [
         image: "img/sable.png",
         speed: "4.0 m/s",
         year: "2024",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
     },
     { 
         name: "STEVE HARRINGTON", 
@@ -341,15 +383,17 @@ const survivors = [
         image: "img/steve.png",
         speed: "4.0 m/s",
         year: "2019",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "DAVID TAPP", 
         hint: "Un detective obsesionado. Justo cuando se desangraba en el suelo tras recibir un disparo investigando a Jigsaw, la Entidad se lo llevó.", 
         image: "img/tapp.png",
-        speed: "4.0 m/s (Tenacidad)",
+        speed: "4.0 m/s",
         year: "2018",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Estadounidense"
     },
     { 
         name: "TAURIE", 
@@ -357,7 +401,8 @@ const survivors = [
         image: "img/taurie.png",
         speed: "4.0 m/s",
         year: "2024",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Desconocido"
     },
     { 
         name: "THALITA LYRA", 
@@ -365,7 +410,8 @@ const survivors = [
         image: "img/thalita.png",
         speed: "4.0 m/s",
         year: "2023",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Brasileña"
     },
     { 
         name: "TREVOR BELMONT", 
@@ -373,15 +419,17 @@ const survivors = [
         image: "img/trevor.png",
         speed: "4.0 m/s",
         year: "2024",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Europeo"
     },
     { 
         name: "VEE", 
         hint: "Una viajera solitaria cuya caravana fue envuelta repentinamente por una gélida y sobrenatural niebla negra a mitad de la carretera.", 
         image: "img/vee.png",
         speed: "4.0 m/s",
-        year: "Original",
-        gender: "Femenino"
+        year: "2026",
+        gender: "Femenino",
+        origin: "Desconocido"
     },
     { 
         name: "VITTORIO TOSCANO", 
@@ -389,7 +437,8 @@ const survivors = [
         image: "img/vittorio.png",
         speed: "4.0 m/s",
         year: "2022",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Italiano"
     },
     { 
         name: "YOICHI ASAKAWA", 
@@ -397,7 +446,8 @@ const survivors = [
         image: "img/yoichi.png",
         speed: "4.0 m/s",
         year: "2022",
-        gender: "Masculino"
+        gender: "Masculino",
+        origin: "Japonés"
     },
     { 
         name: "YUI KIMURA", 
@@ -405,7 +455,8 @@ const survivors = [
         image: "img/yui.png",
         speed: "4.0 m/s",
         year: "2019",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Japonesa"
     },
     { 
         name: "ZARINA KASSIR", 
@@ -413,7 +464,17 @@ const survivors = [
         image: "img/zarina.png",
         speed: "4.0 m/s",
         year: "2020",
-        gender: "Femenino"
+        gender: "Femenino",
+        origin: "Estadounidense"
+    },
+    { 
+        name: "SHANE", 
+        hint: "Un superviviente profundamente conectado con sus raíces que confía en sus instintos y su gran valentía para guiar a otros a través de la niebla.", 
+        image: "img/shane.png",
+        speed: "4.0 m/s",
+        year: "2026",
+        gender: "Masculino",
+        origin: "Norteamericano"
     }
 ];
 

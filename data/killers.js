@@ -5,39 +5,59 @@ const killers = [
         image: "img/trampero.png",
         speed: "4.6 m/s",
         year: "2016",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "EL ESPECTRO", 
         hint: "Toca una campana ensangrentada para volverse invisible y acechar a sus víctimas.", 
         image: "img/espectro.png",
-        speed: "4.6 m/s (Invisible: 6.0 m/s)",
+        speed: "4.6 m/s",
         year: "2016",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Nigeriano"
     },
     { 
         name: "EL PUEBLERINO", 
         hint: "Carga con una motosierra letal para correr a gran velocidad por el mapa.", 
         image: "img/pueblerino.png",
-        speed: "4.6 m/s (Motosierra: 9.2 m/s)",
+        speed: "4.6 m/s",
         year: "2016",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "40m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "LA ENFERMERA", 
         hint: "Una figura fantasmal capaz de teletransportarse a través de paredes y obstáculos.", 
         image: "img/enfermera.png",
-        speed: "3.85 m/s (Teletransporte)",
+        speed: "3.85 m/s",
         year: "2016",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Estadounidense"
     },
     { 
         name: "LA FORMA", 
         hint: "La maldad encarnada. Te observa en silencio para aumentar su poder antes de atacar.", 
         image: "img/forma.png",
-        speed: "4.6 m/s (Nivel 1: 4.2 m/s)",
+        speed: "4.6 m/s",
         year: "2016",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "16m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "LA BRUJA", 
@@ -45,7 +65,11 @@ const killers = [
         image: "img/bruja.png",
         speed: "4.4 m/s",
         year: "2016",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "24m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Bajo",
+        origin: "Estadounidense"
     },
     { 
         name: "EL DOCTOR", 
@@ -53,7 +77,11 @@ const killers = [
         image: "img/doctor.png",
         speed: "4.6 m/s",
         year: "2017",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "LA CAZADORA", 
@@ -61,15 +89,23 @@ const killers = [
         image: "img/cazadora.png",
         speed: "4.4 m/s",
         year: "2017",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "20m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Ruso"
     },
     { 
         name: "EL CANIBAL", 
         hint: "Agita su motosierra en un frenesí letal capaz de derribar a múltiples víctimas a la vez.", 
         image: "img/canibal.png",
-        speed: "4.6 m/s (Frenesí: 5.29 m/s)",
+        speed: "4.6 m/s",
         year: "2017",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "LA PESADILLA", 
@@ -77,15 +113,23 @@ const killers = [
         image: "img/pesadilla.png",
         speed: "4.6 m/s",
         year: "2017",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Estadounidense"
     },
     { 
         name: "LA CERDA", 
         hint: "Te coloca trampas para osos invertidas en la cabeza que debes quitarte antes de que el temporizador acabe.", 
         image: "img/cerda.png",
-        speed: "4.6 m/s (Agachada: 3.6 m/s)",
+        speed: "4.6 m/s",
         year: "2018",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Estadounidense"
     },
     { 
         name: "EL PAYASO", 
@@ -93,23 +137,35 @@ const killers = [
         image: "img/payaso.png",
         speed: "4.6 m/s",
         year: "2018",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "EL ESPIRITU", 
         hint: "Abandona su cuerpo físico para moverse rápidamente sin ser vista, guiándose por el sonido.", 
         image: "img/espiritu.png",
-        speed: "4.4 m/s (Faseo: 7.04 m/s)",
+        speed: "4.4 m/s",
         year: "2018",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "24m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Japonés"
     },
     { 
         name: "LA LEGION", 
         hint: "Un grupo de adolescentes frenéticos que corren rápido y apuñalan a varios en cadena.", 
         image: "img/legion.png",
-        speed: "4.6 m/s (Frenesí: 5.2 m/s)",
+        speed: "4.6 m/s",
         year: "2018",
-        gender: "Mixto"
+        gender: "Mixto",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Canadiense"
     },
     { 
         name: "LA PLAGA", 
@@ -117,15 +173,23 @@ const killers = [
         image: "img/plaga.png",
         speed: "4.6 m/s",
         year: "2019",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Babilónico"
     },
     { 
         name: "GHOST FACE", 
         hint: "Se asoma desde las esquinas y te acecha en silencio para exponerte con un solo golpe.", 
         image: "img/ghostface.png",
-        speed: "4.6 m/s (Acecho: 3.6 m/s)",
+        speed: "4.6 m/s",
         year: "2019",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Estadounidense"
     },
     { 
         name: "EL DEMOGORGON", 
@@ -133,15 +197,23 @@ const killers = [
         image: "img/demogorgon.png",
         speed: "4.6 m/s",
         year: "2019",
-        gender: "Sin género (Monstruo)"
+        gender: "Sin género",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Desconocido"
     },
     { 
         name: "EL ONI", 
         hint: "Un demonio samurái que absorbe la sangre de sus víctimas para entrar en una furia imparable con su kanabo.", 
         image: "img/oni.png",
-        speed: "4.6 m/s (Furia: 7.82 m/s)",
+        speed: "4.6 m/s",
         year: "2019",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Japonés"
     },
     { 
         name: "EL ARPONERO", 
@@ -149,7 +221,11 @@ const killers = [
         image: "img/arponero.png",
         speed: "4.4 m/s",
         year: "2020",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "EL VERDUGO", 
@@ -157,23 +233,35 @@ const killers = [
         image: "img/verdugo.png",
         speed: "4.6 m/s",
         year: "2020",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "EL DETERIORO", 
         hint: "Un alquimista adicto al suero que rebota violentamente contra los muros para alcanzar gran velocidad.", 
         image: "img/deterioro.png",
-        speed: "4.6 m/s (Embestida: 9.2 m/s)",
+        speed: "4.6 m/s",
         year: "2020",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Escocés"
     },
     { 
         name: "LOS GEMELOS", 
         hint: "Un dúo macabro donde puedes soltar a un pequeño deforme para que persiga y salte sobre los supervivientes.", 
         image: "img/gemelos.png",
-        speed: "4.6 m/s (Victor: 6.0 m/s)",
+        speed: "4.6 m/s",
         year: "2020",
-        gender: "Mixto"
+        gender: "Mixto",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Francés"
     },
     { 
         name: "EL EMBAUCADOR", 
@@ -181,7 +269,11 @@ const killers = [
         image: "img/embaucador.png",
         speed: "4.4 m/s",
         year: "2021",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "24m",
+        attackType: "A distancia",
+        height: "Promedio",
+        origin: "Coreano"
     },
     { 
         name: "EL NEMESIS", 
@@ -189,7 +281,11 @@ const killers = [
         image: "img/nemesis.png",
         speed: "4.6 m/s",
         year: "2021",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "EL CENOBITA", 
@@ -197,7 +293,11 @@ const killers = [
         image: "img/cenobita.png",
         speed: "4.6 m/s",
         year: "2021",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Británico"
     },
     { 
         name: "LA ARTISTA", 
@@ -205,7 +305,11 @@ const killers = [
         image: "img/artista.png",
         speed: "4.6 m/s",
         year: "2021",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Chileno"
     },
     { 
         name: "LA ONRYO", 
@@ -213,7 +317,11 @@ const killers = [
         image: "img/onryo.png",
         speed: "4.6 m/s",
         year: "2022",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "24m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Bajo",
+        origin: "Japonés"
     },
     { 
         name: "LA DRAGA", 
@@ -221,7 +329,11 @@ const killers = [
         image: "img/draga.png",
         speed: "4.6 m/s",
         year: "2022",
-        gender: "Sin género (Abominación)"
+        gender: "Sin género",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "EL CEREBRO", 
@@ -229,7 +341,11 @@ const killers = [
         image: "img/cerebro.png",
         speed: "4.6 m/s",
         year: "2022",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "40m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Estadounidense"
     },
     { 
         name: "EL CABALLERO", 
@@ -237,7 +353,11 @@ const killers = [
         image: "img/caballero.png",
         speed: "4.6 m/s",
         year: "2022",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Húngaro"
     },
     { 
         name: "COMERCIANTE DE CALAVERAS", 
@@ -245,7 +365,11 @@ const killers = [
         image: "img/comerciante.png",
         speed: "4.6 m/s",
         year: "2023",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Brasileño"
     },
     { 
         name: "LA SINGULARIDAD", 
@@ -253,15 +377,23 @@ const killers = [
         image: "img/singularidad.png",
         speed: "4.6 m/s",
         year: "2023",
-        gender: "Sin género (IA)"
+        gender: "Sin género",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Desconocido"
     },
     { 
         name: "EL XENOMORFO", 
         hint: "Un alienígena perfecto que viaja por túneles subterráneos y ataca letalmente con su cola.", 
         image: "img/xenomorfo.png",
-        speed: "4.6 m/s (Gateando: 9.0 m/s)",
+        speed: "4.6 m/s",
         year: "2023",
-        gender: "Sin género (Alien)"
+        gender: "Sin género",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Desconocido"
     },
     { 
         name: "EL CHICO BUENO", 
@@ -269,7 +401,11 @@ const killers = [
         image: "img/chico.png",
         speed: "4.4 m/s",
         year: "2023",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Bajo",
+        origin: "Estadounidense"
     },
     { 
         name: "LO DESCONOCIDO", 
@@ -277,7 +413,11 @@ const killers = [
         image: "img/desconocido.png",
         speed: "4.6 m/s",
         year: "2024",
-        gender: "Desconocido"
+        gender: "Desconocido",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "EL LICHE", 
@@ -285,15 +425,23 @@ const killers = [
         image: "img/liche.png",
         speed: "4.6 m/s",
         year: "2024",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Desconocido"
     },
     { 
         name: "EL SEÑOR OSCURO", 
         hint: "Puede transformarse en un murciélago o un lobo para cazarte, y lanza pilares de fuego infernal.", 
         image: "img/dracula.png",
-        speed: "4.6 m/s (Murciélago: 6.0 m/s)",
+        speed: "4.6 m/s",
         year: "2024",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Rumano"
     },
     { 
         name: "LA ADIESTRADORA", 
@@ -301,7 +449,11 @@ const killers = [
         image: "img/adiestradora.png",
         speed: "4.6 m/s",
         year: "2024",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Británico"
     },
     { 
         name: "VECNA", 
@@ -309,7 +461,11 @@ const killers = [
         image: "img/vecna.png",
         speed: "4.6 m/s",
         year: "2026",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "A distancia",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "JASON VOORHEES", 
@@ -317,23 +473,35 @@ const killers = [
         image: "img/jason.png",
         speed: "4.6 m/s",
         year: "2026",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Estadounidense"
     },
     { 
         name: "LA KRASUE", 
         hint: "Un espíritu maldito del sudeste asiático que se manifiesta como una cabeza flotante con sus vísceras colgando. Condenada por una traición, el Ente la arrastró a la niebla.", 
         image: "img/krasue.png",
-        speed: "4.6 m/s (Flotando)",
+        speed: "4.6 m/s",
         year: "2025",
-        gender: "Femenino"
+        gender: "Femenino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Asiático"
     },
     { 
         name: "KANEKI", 
         hint: "Un joven convertido en híbrido de ghoul tras un trágico trasplante. Consumido por la locura, desató su letal Kagune de ciempiés justo antes de ser reclamado.", 
         image: "img/kaneki.png",
-        speed: "4.6 m/s (Kagune: 5.2 m/s)",
+        speed: "4.6 m/s",
         year: "2025",
-        gender: "Masculino"
+        gender: "Masculino",
+        terrorRadius: "32m",
+        attackType: "Cuerpo a cuerpo",
+        height: "Promedio",
+        origin: "Japonés"
     }
 ];
 
