@@ -7,7 +7,6 @@ const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas de las bases de datos
-
 app.get('/api/killers', (req, res) => res.json(require('./data/killers')));
 app.get('/api/survivors', (req, res) => res.json(require('./data/survivors')));
 app.get('/api/perks', (req, res) => res.json(require('./data/perks')));
