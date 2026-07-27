@@ -26,6 +26,10 @@ body {
     box-shadow: 0 0 40px rgba(183, 28, 28, 0.4);
     position: relative;
 }
+/* Espacio extra para que el botón de volver no pise los títulos */
+.game-container {
+    padding-top: 75px;
+}
 
 .main-title { color: #d32f2f; font-size: 2.6rem; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 2px 2px 4px #000; }
 #game-area-title { font-size: 2rem; margin-bottom: 10px; color: #fff; }
