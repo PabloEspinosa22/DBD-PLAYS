@@ -1,18 +1,17 @@
 const express = require('express');
-const router = express.Router();
-const killers = require('../data/killers');
-const survivors = require('../data/survivors');
+const path = require('path');
+const app = express();
+const port = process.env.PORT || 3000;
 
-router.get('/killers', (req, res) => {
-    res.json(killers);
+// Sirve los archivos de la carpeta public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Rutas de las bases de datos
+app.get('/api/killers', (req, res) => res.json(require('./data/killers')));
+app.get('/api/survivors', (req, res) => res.json(require('./data/survivors')));
+app.get('/api/perks', (req, res) => res.json(require('./data/perks')));
+
+// Iniciar el servidor
+app.listen(port, () => {
+    console.log(`La Entidad está escuchando en el puerto ${port}`);
 });
-
-router.get('/survivors', (req, res) => {
-    res.json(survivors);
-});
-
-router.get('/all', (req, res) => {
-    res.json([...killers, ...survivors]);
-});
-
-module.exports = router;

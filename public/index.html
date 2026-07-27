@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Reino del Ente - Hub</title>
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=6.0">
 </head>
 <body>
     <button id="mute-btn" class="mute-btn" onclick="toggleMute()">🔊 Sonido: ON</button>
@@ -26,9 +26,9 @@
         <div class="perks-store">
             <h3>Red de Sangre (Comprar Ventajas)</h3>
             <div class="perks-buttons">
-                <button id="btn-djv" class="perk-btn" onclick="buyPerk('djv', 3000)">Déjà Vu (3000 PB)</button>
-                <button id="btn-bbq" class="perk-btn" onclick="buyPerk('bbq', 4000)">Barbacoa y Chile (4000 PB)</button>
-                <button id="btn-dh" class="perk-btn" onclick="buyPerk('dh', 5000)">Fajador (5000 PB)</button>
+                <button id="btn-djv" class="perk-btn-store" onclick="buyPerk('djv', 3000)">Déjà Vu (3000 PB)</button>
+                <button id="btn-bbq" class="perk-btn-store" onclick="buyPerk('bbq', 4000)">Barbacoa y Chile (4000 PB)</button>
+                <button id="btn-dh" class="perk-btn-store" onclick="buyPerk('dh', 5000)">Fajador (5000 PB)</button>
             </div>
             <p id="perk-msg" class="perk-msg"></p>
         </div>
@@ -51,6 +51,7 @@
                 <p class="section-label">BASE DE DATOS Y HERRAMIENTAS</p>
                 <button class="mode-btn catalog-btn" onclick="launchCatalog('killer')">Ver Catálogo General</button>
                 <button class="mode-btn roulette-btn" onclick="launchRoulette()">Ruleta de Asesinos</button>
+                <button class="mode-btn build-btn" onclick="launchPerkRoulette()">Ruleta de Builds (Survi)</button>
             </div>
         </div>
     </div>
@@ -59,7 +60,6 @@
     <div class="game-container hidden" id="game-area">
         <button class="return-hub-btn" onclick="returnToHub()">🔥 Volver a la Fogata</button>
         
-        <!-- Cabecera de estadísticas de partida (Se oculta en herramientas) -->
         <div id="game-stats-header">
             <h2 id="game-area-title">Modo de Juego</h2>
             <div class="score-board">
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <!-- 2. DBDLE (LOS ARCHIVOS) -->
+        <!-- 2. DBDLE -->
         <div id="archive-ui" class="hidden archive-dbdle-container">
             <div class="dbdle-input-wrapper">
                 <input type="text" id="dbdle-search" placeholder="Escribe el nombre aquí..." autocomplete="off">
@@ -89,17 +89,12 @@
 
             <div class="dbdle-legend">
                 <span><div class="legend-box match"></div> Correcto</span>
+                <span><div class="legend-box almost"></div> Casi (Naranja)</span>
                 <span><div class="legend-box wrong"></div> Incorrecto</span>
             </div>
 
             <div class="dbdle-table">
-                <div class="dbdle-header">
-                    <div>Sujeto</div>
-                    <div>Rol</div>
-                    <div>Género</div>
-                    <div>Velocidad</div>
-                    <div>Año de salida</div>
-                </div>
+                <div id="dbdle-dynamic-header" class="dbdle-header"></div>
                 <div id="guesses-grid" class="guesses-grid"></div>
             </div>
         </div>
@@ -115,7 +110,7 @@
             <div id="catalog-grid" class="grid-container"></div>
         </div>
 
-        <!-- 4. NUEVO: RULETA DE ASESINOS -->
+        <!-- 4. RULETA DE ASESINOS -->
         <div id="roulette-view" class="hidden">
             <h2 class="mode-title" style="color: #b388ff;">SELECCIÓN ALEATORIA DE ASESINOS</h2>
             
@@ -131,9 +126,36 @@
             <div id="roulette-grid" class="roulette-grid"></div>
         </div>
 
+        <!-- 5. RULETA DE VENTAJAS SURVI -->
+        <div id="perk-roulette-view" class="hidden">
+            <h2 class="mode-title" style="color: #00bfa5;">RULETA DE BUILD (SUPERVIVIENTE)</h2>
+            
+            <div class="roulette-controls" style="margin-bottom: 15px;">
+                <button onclick="setAllPerks(true)" class="tab-btn" style="background:#2e7d32;">Habilitar Todas</button>
+                <button onclick="setAllPerks(false)" class="tab-btn" style="background:#c62828;">Quitar Todas</button>
+            </div>
+            
+            <div style="margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="wildcard-input" placeholder="Ej: Jugar a una mano..." style="padding: 10px; border-radius: 4px; border: 1px solid #555; background: #111; color: white; width: 220px; outline: none;">
+                <button class="tab-btn" style="background: #ef6c00; font-weight: bold;" onclick="addWildcardPerk()">+ Añadir Comodín</button>
+            </div>
+
+            <p style="color: #aaa; margin-top: 10px; font-weight: bold;" id="perks-counter">0 / 0 Activas</p>
+            <div id="perks-pool-grid" class="perks-pool-grid"></div>
+
+            <button class="spin-btn" style="background: #00695c; border-color: #00897b; margin-top: 25px;" onclick="spinPerks()">🎲 GENERAR BUILD</button>
+            
+            <div class="build-container">
+                <div class="perk-slot" id="perk-slot-1"><p class="empty-text">?</p></div>
+                <div class="perk-slot" id="perk-slot-2"><p class="empty-text">?</p></div>
+                <div class="perk-slot" id="perk-slot-3"><p class="empty-text">?</p></div>
+                <div class="perk-slot" id="perk-slot-4"><p class="empty-text">?</p></div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- MODAL FINAL DE DERROTA (AHORCADO) -->
+    <!-- MODAL FINAL DE DERROTA (AHORCADO / DBDLE) -->
     <div id="final-game-over-modal" class="modal hidden">
         <div class="modal-content">
             <h2 style="color: #d32f2f; margin-bottom: 15px;">¡LA ENTIDAD TE HA RECLAMADO!</h2>
@@ -157,7 +179,7 @@
         </div>
     </div>
 
-    <!-- NUEVO: MODAL DE RESULTADO RULETA -->
+    <!-- MODAL DE RESULTADO RULETA -->
     <div id="roulette-modal" class="modal hidden">
         <div class="modal-content" style="border-color: #512da8; box-shadow: 0 0 30px rgba(81, 45, 168, 0.6);">
             <h2 style="color: #b388ff; margin-bottom: 10px;">LA ENTIDAD EXIGE SANGRE</h2>
@@ -168,6 +190,6 @@
         </div>
     </div>
 
-    <script src="app.js?v=5.0"></script>
+    <script src="app.js?v=6.0"></script>
 </body>
 </html>

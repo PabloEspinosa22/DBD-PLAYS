@@ -49,9 +49,9 @@ body {
 .perks-store { background: #141414; border: 1px solid #333; padding: 15px; border-radius: 6px; margin-bottom: 25px; }
 .perks-store h3 { color: #90caf9; font-size: 1.05rem; margin-bottom: 10px; }
 .perks-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.perk-btn { background: #222; color: #aaa; border: 1px solid #555; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
-.perk-btn:hover { border-color: #fff; color: #fff; }
-.perk-btn.active { background: #1565c0; color: white; border-color: #64b5f6; font-weight: bold; pointer-events: none; }
+.perk-btn-store { background: #222; color: #aaa; border: 1px solid #555; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+.perk-btn-store:hover { border-color: #fff; color: #fff; }
+.perk-btn-store.active { background: #1565c0; color: white; border-color: #64b5f6; font-weight: bold; pointer-events: none; }
 .perk-msg { margin-top: 8px; font-size: 0.85rem; color: #4caf50; min-height: 16px; }
 
 /* ESTRUCTURA HUB BOTONES */
@@ -68,6 +68,7 @@ body {
 .dbdle-s-btn { background-color: #003366; border-color: #1e88e5; }
 .catalog-btn { background-color: #333; border-color: #777; color: #ffca28; }
 .roulette-btn { background-color: #311b92; border-color: #651fff; color: white; }
+.build-btn { background-color: #004d40; border-color: #00695c; color: white; }
 
 /* HEADER DE JUEGO (AHORCADO / DBDLE) */
 .score-board { font-size: 1.1rem; margin-bottom: 6px; color: #ffca28; font-weight: bold; }
@@ -82,7 +83,7 @@ body {
 .keyboard button:hover:not(:disabled) { background: #d32f2f; border-color: white; transform: translateY(-2px); }
 .keyboard button:disabled { opacity: 0.25; background: #000; border-color: #222; cursor: not-allowed; }
 
-/* 2. MODO DBDLE (5 COLUMNAS SÓLIDAS) */
+/* 2. MODO DBDLE */
 .dbdle-input-wrapper { position: relative; max-width: 450px; margin: 0 auto 20px auto; }
 #dbdle-search { width: 100%; padding: 14px 20px; background: #0f0f0f; border: 2px solid #555; border-radius: 6px; color: #fff; font-size: 1.1rem; outline: none; text-align: center; }
 #dbdle-search:focus { border-color: #ffca28; }
@@ -96,17 +97,22 @@ body {
 .dbdle-legend span { display: flex; align-items: center; gap: 6px; }
 .legend-box { width: 16px; height: 16px; border-radius: 3px; }
 
-.dbdle-table { width: 100%; overflow-x: auto; }
-.dbdle-header, .guess-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1.1fr 0.9fr; gap: 6px; align-items: stretch; margin-bottom: 6px; min-width: 580px; }
+/* CLASES PARA COLORES Y RESULTADOS DBDLE */
+.match { background-color: #2e7d32 !important; color: white; }
+.wrong { background-color: #b71c1c !important; color: white; }
+.almost { background-color: #f57c00 !important; color: white; } 
+.arrow-symbol { font-size: 1.4rem; font-weight: 900; line-height: 0.7; margin-top: 4px; color: #000; }
+
+.dbdle-table { width: 100%; overflow-x: auto; padding-bottom: 10px; }
 .dbdle-header { color: #aaa; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid #444; padding-bottom: 8px; margin-bottom: 12px; }
+
+/* GRIDS DBDLE (8 Cols vs 5 Cols) */
+.killer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr 1fr 1fr 1fr 0.9fr; gap: 6px; align-items: stretch; margin-bottom: 6px; min-width: 950px; }
+.survivor-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.1fr 0.9fr; gap: 6px; align-items: stretch; margin-bottom: 6px; min-width: 580px; }
 
 .guess-cell { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 12px 6px; font-weight: bold; font-size: 0.95rem; text-align: center; border: 1px solid rgba(255,255,255,0.05); min-height: 64px; border-radius: 4px; }
 .name-cell { flex-direction: row; justify-content: flex-start; gap: 12px; background: #0a0a0a; border-color: #333; color: white; padding-left: 10px; text-align: left; font-size: 0.9rem; }
 .name-cell img { width: 44px; height: 44px; object-fit: cover; border: 1px solid #555; border-radius: 3px; flex-shrink: 0; }
-
-.match { background-color: #2e7d32 !important; color: white; }
-.wrong { background-color: #b71c1c !important; color: white; }
-.arrow-symbol { font-size: 1.4rem; font-weight: 900; line-height: 0.7; margin-top: 4px; color: #ffeb3b; }
 
 /* 3. CATÁLOGO */
 .catalog-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
@@ -120,7 +126,7 @@ body {
 .card h3 { font-size: 1rem; color: #fff; margin-bottom: 4px; }
 .card p { font-size: 0.8rem; color: #aaa; }
 
-/* 4. NUEVO: RULETA DE ASESINOS */
+/* 4. RULETA DE ASESINOS */
 .roulette-controls { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
 .spin-btn { background: #512da8; color: white; border: 2px solid #7e57c2; padding: 15px 30px; font-size: 1.4rem; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 0 20px rgba(81, 45, 168, 0.4); animation: pulseSpin 2s infinite; transition: 0.2s; }
 .spin-btn:hover { background: #651fff; transform: scale(1.05); }
@@ -132,7 +138,6 @@ body {
 .roulette-card img { width: 75px; height: 75px; object-fit: cover; border-radius: 8px; border: 2px solid #7e57c2; transition: 0.3s; }
 .roulette-card h4 { font-size: 0.7rem; color: #fff; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Estilo para asesinos deshabilitados en la ruleta */
 .roulette-card.disabled img { filter: grayscale(100%) opacity(0.3); border-color: #222; }
 .roulette-card.disabled h4 { color: #555; text-decoration: line-through; }
 .roulette-card:hover { transform: scale(1.1); }
@@ -151,3 +156,32 @@ body {
 
 .modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 3000; }
 .modal-content { background: #141414; border: 2px solid #555; padding: 35px; border-radius: 8px; max-width: 450px; width: 90%; }
+
+/* =========================================
+   5. RULETA DE VENTAJAS Y COMODINES
+   ========================================= */
+.perks-pool-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px; max-height: 220px; overflow-y: auto; padding: 15px; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; }
+.perk-tag { background: #004d40; color: white; padding: 8px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: 0.2s; border: 1px solid #00bfa5; user-select: none; }
+.perk-tag.disabled { background: #222; color: #555; border-color: #333; text-decoration: line-through; }
+.perk-tag:hover { transform: scale(1.05); }
+.perk-tag.wildcard { background: #e65100; border-color: #ff9800; }
+.perk-tag.wildcard.disabled { background: #3e2723; border-color: #4e342e; color: #8d6e63; }
+
+.build-container { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; padding: 20px; }
+.perk-slot { 
+    width: 130px; 
+    height: 130px; 
+    background: rgba(0, 0, 0, 0.7); 
+    border: 2px dashed #00bfa5; 
+    border-radius: 12px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 10px; 
+    text-align: center; 
+    box-shadow: 0 0 15px rgba(0, 191, 165, 0.2);
+}
+.perk-slot img { width: 75px; height: 75px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(2px 2px 2px #000); }
+.perk-slot p { font-size: 0.85rem; color: #fff; font-weight: bold; margin: 0; line-height: 1.1; }
+.perk-slot .empty-text { color: #555; font-size: 1.2rem; font-weight: bold; }
