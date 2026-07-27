@@ -1,17 +1,10 @@
 const express = require('express');
-const path = require('path');
-const app = express();
-const port = process.env.PORT || 3000;
+const router = express.Router();
 
-// El '../' le dice que salga de la carpeta 'routes' y busque 'public'
-app.use(express.static(path.join(__dirname, '../public')));
+// Como estamos dentro de la carpeta 'routes', usamos '../' para salir y entrar a 'data'
+router.get('/killers', (req, res) => res.json(require('../data/killers')));
+router.get('/survivors', (req, res) => res.json(require('../data/survivors')));
+router.get('/perks', (req, res) => res.json(require('../data/perks')));
 
-// Rutas de las bases de datos (también saliendo un nivel con '../')
-app.get('/api/killers', (req, res) => res.json(require('../data/killers')));
-app.get('/api/survivors', (req, res) => res.json(require('../data/survivors')));
-app.get('/api/perks', (req, res) => res.json(require('../data/perks')));
-
-// Iniciar el servidor
-app.listen(port, () => {
-    console.log(`La Entidad está escuchando en el puerto ${port}`);
-});
+// Es obligatorio exportar el router para que server.js lo pueda leer
+module.exports = router;
