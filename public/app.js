@@ -539,21 +539,25 @@ window.spinRoulette = function() {
     const modalImg = document.getElementById('roulette-modal-img');
     const modalName = document.getElementById('roulette-modal-name');
     
-    // 1. Mostrar el modal "Pensando" para crear suspenso
-    modalImg.src = ""; // Imagen en blanco temporal
-    modalImg.alt = "Cargando...";
-    modalName.innerText = "La Entidad está decidiendo...";
-    modalImg.classList.remove('killer-roll-animation'); // Reiniciamos la animación
+    // 1. Mostrar el modal "Pensando" con estilo (sin imagen rota)
+    modalImg.style.display = 'none'; // Ocultamos la etiqueta de imagen temporalmente
+    modalImg.classList.remove('killer-roll-animation'); 
+    
+    // Le ponemos un texto con animación para crear el suspenso
+    modalName.innerHTML = `<div style="font-size: 1.6rem; color: #7e57c2; margin: 40px 0; animation: pulseSpin 1s infinite;">🕸️ Invocando Asesino...</div>`;
     
     document.getElementById('roulette-modal').classList.remove('hidden');
     
-    // 2. Esperamos 1 segundo (1000ms) y revelamos el resultado con la animación de blur
+    // 2. Esperamos 1.5 segundos (1500ms) y revelamos el resultado
     setTimeout(() => {
+        modalImg.style.display = 'block'; // Volvemos a mostrar la imagen
         modalImg.src = chosenKiller.image;
         modalImg.alt = chosenKiller.name;
-        modalName.innerText = chosenKiller.name;
         
-        // Disparamos la animación visual y el golpe sonoro final
+        // Regresamos el nombre a su formato normal
+        modalName.innerHTML = chosenKiller.name;
+        
+        // Disparamos la animación visual
         modalImg.classList.add('killer-roll-animation');
         
         if (!isMuted) { 
@@ -561,7 +565,7 @@ window.spinRoulette = function() {
             finalHit.volume = 1.0;
             finalHit.play().catch(e=>{});
         }
-    }, 1000);
+    }, 1500); // Le subí el tiempo a 1.5s para un poquito más de emoción
 }
 
 // =========================================================================
