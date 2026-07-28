@@ -189,3 +189,40 @@ body {
 .perk-slot img { width: 75px; height: 75px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(2px 2px 2px #000); }
 .perk-slot p { font-size: 0.85rem; color: #fff; font-weight: bold; margin: 0; line-height: 1.1; }
 .perk-slot .empty-text { color: #555; font-size: 1.2rem; font-weight: bold; }
+
+/* =========================================
+   EFECTOS DE ANIMACIÓN PARA RULETAS
+   ========================================= */
+
+/* Oculta los elementos antes de la animación */
+.hidden-perk {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+/* Efecto de aparición con rebote (pop-in) */
+.reveal-pop {
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    0% { 
+        opacity: 0; 
+        transform: scale(0.3) translateY(20px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+}
+
+/* Efecto tipo ruleta rápida para el Asesino */
+.killer-roll-animation {
+    animation: blurRoll 1.5s ease-out forwards;
+}
+
+@keyframes blurRoll {
+    0% { filter: blur(8px); transform: scale(0.9); opacity: 0.5; }
+    80% { filter: blur(2px); transform: scale(1.05); opacity: 0.9; }
+    100% { filter: blur(0); transform: scale(1); opacity: 1; }
+}

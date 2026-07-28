@@ -525,6 +525,7 @@ window.spinRoulette = function() {
         return;
     }
     
+    // Sonido de inicio del sorteo
     if (!isMuted) { hitSound.currentTime = 0; hitSound.play().catch(e=>{}); }
     
     const randomIndex = Math.floor(Math.random() * activeRoulettePool.length);
@@ -534,13 +535,37 @@ window.spinRoulette = function() {
     activeRoulettePool = activeRoulettePool.filter(n => n !== chosenName);
     renderRouletteGrid(); 
     
-    document.getElementById('roulette-modal-img').src = chosenKiller.image;
-    document.getElementById('roulette-modal-name').innerText = chosenKiller.name;
+    // Variables del modal
+    const modalImg = document.getElementById('roulette-modal-img');
+    const modalName = document.getElementById('roulette-modal-name');
+    
+    // 1. Mostrar el modal "Pensando" para crear suspenso
+    modalImg.src = ""; // Imagen en blanco temporal
+    modalImg.alt = "Cargando...";
+    modalName.innerText = "La Entidad está decidiendo...";
+    modalImg.classList.remove('killer-roll-animation'); // Reiniciamos la animación
+    
     document.getElementById('roulette-modal').classList.remove('hidden');
+    
+    // 2. Esperamos 1 segundo (1000ms) y revelamos el resultado con la animación de blur
+    setTimeout(() => {
+        modalImg.src = chosenKiller.image;
+        modalImg.alt = chosenKiller.name;
+        modalName.innerText = chosenKiller.name;
+        
+        // Disparamos la animación visual y el golpe sonoro final
+        modalImg.classList.add('killer-roll-animation');
+        
+        if (!isMuted) { 
+            let finalHit = new Audio('audio/hit.mp3');
+            finalHit.volume = 1.0;
+            finalHit.play().catch(e=>{});
+        }
+    }, 1000);
 }
 
 // =========================================================================
-//                   5. RULETA DE VENTAJAS Y COMODINES
+//                  5. RULETA DE VENTAJAS Y COMODINES
 // =========================================================================
 let activePerksPool = null;
 
@@ -637,18 +662,38 @@ window.spinPerks = function() {
     let shuffled = [...activePerksPool].sort(() => 0.5 - Math.random());
     let selectedNames = shuffled.slice(0, 4);
     
+    // 1. Limpiamos los slots y ponemos el signo de interrogación
     for(let i=0; i<4; i++) {
-        const perkObj = perksList.find(p => p.name === selectedNames[i]);
         const slot = document.getElementById(`perk-slot-${i+1}`);
-        
-        let imgHtml = perkObj.image ? `<img src="${perkObj.image}" alt="${perkObj.name}">` : `<div style="height:75px; display:flex; align-items:center; color:#ff9800; font-size:2.5rem; margin-bottom:10px;">⭐</div>`;
-        let nameColor = perkObj.isWildcard ? "#ff9800" : "#fff";
-        
-        slot.innerHTML = `
-            ${imgHtml}
-            <p style="color: ${nameColor};">${perkObj.name}</p>
-        `;
+        slot.innerHTML = `<p class="empty-text">?</p>`;
     }
+
+    // 2. Revelamos las cartas una por una con un retraso de 400 milisegundos
+    selectedNames.forEach((perkName, index) => {
+        setTimeout(() => {
+            const perkObj = perksList.find(p => p.name === perkName);
+            const slot = document.getElementById(`perk-slot-${index+1}`);
+            
+            let imgHtml = perkObj.image ? `<img src="${perkObj.image}" alt="${perkObj.name}">` : `<div style="height:75px; display:flex; align-items:center; justify-content:center; color:#ff9800; font-size:2.5rem; margin-bottom:10px;">⭐</div>`;
+            let nameColor = perkObj.isWildcard ? "#ff9800" : "#fff";
+            
+            // Insertamos el contenido envuelto en el div que tiene la animación "reveal-pop"
+            slot.innerHTML = `
+                <div class="reveal-pop" style="display:flex; flex-direction:column; align-items:center;">
+                    ${imgHtml}
+                    <p style="color: ${nameColor};">${perkObj.name}</p>
+                </div>
+            `;
+
+            // Reproducimos un pequeño sonido (opcional) cada que cae una carta nueva
+            if (!isMuted && index > 0) { 
+                let cardTick = new Audio('audio/hit.mp3'); 
+                cardTick.volume = 0.4; 
+                cardTick.play().catch(e=>{}); 
+            }
+
+        }, index * 400); // Multiplicar el índice crea el efecto escalonado (0ms, 400ms, 800ms, 1200ms)
+    });
 }
 
 // =========================================================================
