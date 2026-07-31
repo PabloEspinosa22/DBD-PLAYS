@@ -461,9 +461,14 @@ window.filterCatalogLive = function() {
 }
 
 // =========================================================================
-//                         4. RULETA DE ASESINOS
+//                         4. RULETA DE ASESINOS (CON GUARDADO)
 // =========================================================================
 let activeRoulettePool = null;
+
+// Función auxiliar para guardar el progreso en el navegador
+function saveRouletteProgress() {
+    localStorage.setItem('savedKillerPool', JSON.stringify(activeRoulettePool));
+}
 
 function launchRoulette() {
     activeAppMode = "roulette";
@@ -481,7 +486,14 @@ function launchRoulette() {
     if(!isMuted) bgMusic.play().catch(e=>{});
 
     if (activeRoulettePool === null) {
-        activeRoulettePool = killersList.map(k => k.name);
+        // Intentamos cargar el progreso guardado
+        const savedData = localStorage.getItem('savedKillerPool');
+        if (savedData) {
+            activeRoulettePool = JSON.parse(savedData);
+        } else {
+            // Si es la primera vez que entra, habilitamos a todos
+            activeRoulettePool = killersList.map(k => k.name);
+        }
     }
     renderRouletteGrid();
 }
@@ -510,12 +522,14 @@ window.toggleRouletteKiller = function(name) {
     } else {
         activeRoulettePool.push(name); 
     }
+    saveRouletteProgress(); // Guardamos cada vez que activas/desactivas manualmente
     renderRouletteGrid();
 }
 
 window.setAllRoulette = function(state) {
     if (state) { activeRoulettePool = killersList.map(k => k.name); } 
     else { activeRoulettePool = []; }
+    saveRouletteProgress(); // Guardamos al habilitar/quitar todos
     renderRouletteGrid();
 }
 
@@ -532,7 +546,9 @@ window.spinRoulette = function() {
     const chosenName = activeRoulettePool[randomIndex];
     const chosenKiller = killersList.find(k => k.name === chosenName);
     
+    // Eliminamos al asesino elegido de la lista activa
     activeRoulettePool = activeRoulettePool.filter(n => n !== chosenName);
+    saveRouletteProgress(); // ¡Guardamos el progreso automáticamente después del giro!
     renderRouletteGrid(); 
     
     // Variables del modal
@@ -540,24 +556,21 @@ window.spinRoulette = function() {
     const modalName = document.getElementById('roulette-modal-name');
     
     // 1. Mostrar el modal "Pensando" con estilo (sin imagen rota)
-    modalImg.style.display = 'none'; // Ocultamos la etiqueta de imagen temporalmente
+    modalImg.style.display = 'none'; 
     modalImg.classList.remove('killer-roll-animation'); 
     
-    // Le ponemos un texto con animación para crear el suspenso
     modalName.innerHTML = `<div style="font-size: 1.6rem; color: #7e57c2; margin: 40px 0; animation: pulseSpin 1s infinite;">🕸️ Invocando Asesino...</div>`;
     
     document.getElementById('roulette-modal').classList.remove('hidden');
     
     // 2. Esperamos 1.5 segundos (1500ms) y revelamos el resultado
     setTimeout(() => {
-        modalImg.style.display = 'block'; // Volvemos a mostrar la imagen
+        modalImg.style.display = 'block'; 
         modalImg.src = chosenKiller.image;
         modalImg.alt = chosenKiller.name;
         
-        // Regresamos el nombre a su formato normal
         modalName.innerHTML = chosenKiller.name;
         
-        // Disparamos la animación visual
         modalImg.classList.add('killer-roll-animation');
         
         if (!isMuted) { 
@@ -565,7 +578,7 @@ window.spinRoulette = function() {
             finalHit.volume = 1.0;
             finalHit.play().catch(e=>{});
         }
-    }, 1500); // Le subí el tiempo a 1.5s para un poquito más de emoción
+    }, 1500);
 }
 
 // =========================================================================
