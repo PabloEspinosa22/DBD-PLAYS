@@ -504,7 +504,7 @@ const killers = [
         origin: "Japonés"
     },
     {
-        name: "La Sentencia",
+        name: "LA SENTENCIA",
         gender: "Femenino", 
         terrorRadius: "32m",
         speed: "4.4 m/s",

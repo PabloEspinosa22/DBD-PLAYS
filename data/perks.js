@@ -171,7 +171,10 @@ const perks = [
     { name: "Vigilia", image: "img/perks/vigilia.png" },
     { name: "Vínculo", image: "img/perks/vinculo.png" },
     { name: "Visionario", image: "img/perks/visionario.png" },
-    { name: "Voluntad de hierro", image: "img/perks/voluntad de hierro.png" }
+    { name: "Voluntad de hierro", image: "img/perks/voluntad de hierro.png" },
+    { name: "Bendición: Firme", image: "img/perks/firme.png" },
+    { name: "Frutos de tu trabajo", image: "img/perks/frutos de tu trabajo.png" },
+    { name: "El grito de la salvación", image: "img/perks/grito de salvacion.png" }
 ];
 
 module.exports = perks;
