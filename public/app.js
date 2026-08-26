@@ -15,9 +15,9 @@ const maxMistakes = 6;
 let currentRunScore = 0;
 let totalLives = 3;
 
-// Persistencia de usuario
+// Persistencia de usuario (Corregida)
 let totalBloodpoints = parseInt(localStorage.getItem('totalBP')) || 0;
-let storePerks = { djv: false, bbq: false, dh: false };
+let storePerks = JSON.parse(localStorage.getItem('storePerks')) || { djv: false, bbq: false, dh: false };
 
 const rituals = [
     { id: 'perfect', desc: "Adivina un personaje con 0 errores (+5000 PB)", reward: 5000 },
@@ -33,12 +33,30 @@ const heartbeatAudio = new Audio('audio/heartbeat.mp3'); heartbeatAudio.loop = t
 const hitSound = new Audio('audio/hit.mp3');
 const hatchSound = new Audio('audio/hatch.mp3');
 
+// Función centralizada para efectos de sonido (evita lag)
+function playAudioEffect(soundObj, volume = 1.0) {
+    if (isMuted) return;
+    const soundClone = soundObj.cloneNode();
+    soundClone.volume = volume;
+    soundClone.play().catch(() => {});
+}
+
 window.toggleMute = function() {
     isMuted = !isMuted;
     bgMusic.muted = isMuted; heartbeatAudio.muted = isMuted; hitSound.muted = isMuted; hatchSound.muted = isMuted;
     const muteBtn = document.getElementById('mute-btn');
     if(isMuted) { muteBtn.innerText = "🔇 Sonido: OFF"; muteBtn.classList.add('muted'); } 
     else { muteBtn.innerText = "🔊 Sonido: ON"; muteBtn.classList.remove('muted'); if(activeAppMode !== "") bgMusic.play().catch(e=>{}); }
+}
+
+// Función de precarga de imágenes en caché
+function preloadPerkImages() {
+    perksList.forEach(perk => {
+        if (perk.image) {
+            const img = new Image();
+            img.src = perk.image;
+        }
+    });
 }
 
 // --- INICIALIZADOR ---
@@ -56,6 +74,13 @@ async function init() {
         survivorsList = rawS.map(s => ({...s, rol: 'Superviviente'}));
         fullRoster = [...killersList, ...survivorsList];
 
+        // Sincronizar estado visual de ventajas compradas
+        Object.keys(storePerks).forEach(pId => {
+            const btn = document.getElementById(`btn-${pId}`);
+            if (btn && storePerks[pId]) btn.classList.add('active');
+        });
+
+        preloadPerkImages();
         updateMenuHub();
     } catch (e) {
         document.getElementById('ritual-desc').innerText = "Error al conectar con los servidores de la Entidad.";
@@ -65,6 +90,7 @@ async function init() {
 function updateMenuHub() {
     document.getElementById('total-bp').innerText = totalBloodpoints;
     localStorage.setItem('totalBP', totalBloodpoints);
+    localStorage.setItem('storePerks', JSON.stringify(storePerks));
     
     let rankText = "Ceniza IV"; let rankColor = "#8d6e63";
     if(totalBloodpoints > 100000) { rankText = "Iridiscente I"; rankColor = "#ff0033"; }
@@ -157,7 +183,7 @@ function nextHangmanRound() {
         let f = normalizeStr(clean[0]); let l = normalizeStr(clean[clean.length - 1]);
         if(!guessedLetters.includes(f)) guessedLetters.push(f);
         if(!guessedLetters.includes(l)) guessedLetters.push(l);
-        storePerks.djv = false; document.getElementById('btn-djv').classList.remove('active');
+        storePerks.djv = false; document.getElementById('btn-djv').classList.remove('active'); updateMenuHub();
     }
 
     renderHangmanWord(); renderHangmanKeyboard();
@@ -178,9 +204,9 @@ function handleHangmanLetter(letter) {
     
     if (normalizeStr(targetCharacter.name).includes(letter)) renderHangmanWord();
     else {
-        mistakes++; if(!isMuted) { hitSound.currentTime = 0; hitSound.play().catch(e=>{}); }
+        mistakes++; playAudioEffect(hitSound);
         if (mistakes >= maxMistakes && storePerks.dh) {
-            mistakes--; storePerks.dh = false; document.getElementById('btn-dh').classList.remove('active');
+            mistakes--; storePerks.dh = false; document.getElementById('btn-dh').classList.remove('active'); updateMenuHub();
             alert("¡FAJADOR activado! Has evadido el golpe fatal de la Entidad.");
             let missing = targetCharacter.name.split('').filter(char => char !== ' ' && !guessedLetters.includes(normalizeStr(char)));
             if(missing.length > 0) guessedLetters.push(normalizeStr(missing[0]));
@@ -232,7 +258,7 @@ function evalHangmanWinLose(isWin) {
     const wDisp = document.getElementById('word-display');
     if (isWin) {
         let p = 1000 + ((maxMistakes - mistakes) * 500);
-        if (storePerks.bbq && mistakes < 3) { p = Math.floor(p * 1.5); storePerks.bbq = false; document.getElementById('btn-bbq').classList.remove('active'); }
+        if (storePerks.bbq && mistakes < 3) { p = Math.floor(p * 1.5); storePerks.bbq = false; document.getElementById('btn-bbq').classList.remove('active'); updateMenuHub(); }
         currentRunScore += p; totalBloodpoints += p; document.getElementById('score').innerText = currentRunScore;
         wDisp.innerHTML = `<h2 style='color:#4caf50;'>¡Sujeto resuelto! (+${p} PB)</h2>`;
         if(mistakes === 0) checkRitualCompleted('perfect'); if(mistakes === 5) checkRitualCompleted('clutch');
@@ -321,7 +347,12 @@ dbdleSearchInput.addEventListener('input', function() {
     autocompleteDOM.classList.remove('hidden');
 });
 
-document.addEventListener('click', e => { if(e.target !== dbdleSearchInput) autocompleteDOM.classList.add('hidden'); });
+// Bug Fix: Clic fuera del buscador
+document.addEventListener('click', e => { 
+    if(e.target !== dbdleSearchInput && !autocompleteDOM.contains(e.target)) {
+        autocompleteDOM.classList.add('hidden'); 
+    }
+});
 
 function evaluateDbdleGuess(guessed) {
     const grid = document.getElementById('guesses-grid');
@@ -380,7 +411,7 @@ function evaluateDbdleGuess(guessed) {
     }
 
     grid.insertBefore(row, grid.firstChild);
-    if(!isMuted) { hitSound.currentTime = 0; hitSound.play().catch(e=>{}); }
+    playAudioEffect(hitSound);
 
     if (guessed.name === targetCharacter.name) {
         dbdleSearchInput.disabled = true; dbdleSearchInput.placeholder = "¡Adivinado!";
@@ -461,11 +492,10 @@ window.filterCatalogLive = function() {
 }
 
 // =========================================================================
-//                         4. RULETA DE ASESINOS (CON GUARDADO)
+//                  4. RULETA DE ASESINOS (CON GUARDADO)
 // =========================================================================
 let activeRoulettePool = null;
 
-// Función auxiliar para guardar el progreso en el navegador
 function saveRouletteProgress() {
     localStorage.setItem('savedKillerPool', JSON.stringify(activeRoulettePool));
 }
@@ -486,12 +516,10 @@ function launchRoulette() {
     if(!isMuted) bgMusic.play().catch(e=>{});
 
     if (activeRoulettePool === null) {
-        // Intentamos cargar el progreso guardado
         const savedData = localStorage.getItem('savedKillerPool');
         if (savedData) {
             activeRoulettePool = JSON.parse(savedData);
         } else {
-            // Si es la primera vez que entra, habilitamos a todos
             activeRoulettePool = killersList.map(k => k.name);
         }
     }
@@ -522,14 +550,14 @@ window.toggleRouletteKiller = function(name) {
     } else {
         activeRoulettePool.push(name); 
     }
-    saveRouletteProgress(); // Guardamos cada vez que activas/desactivas manualmente
+    saveRouletteProgress();
     renderRouletteGrid();
 }
 
 window.setAllRoulette = function(state) {
     if (state) { activeRoulettePool = killersList.map(k => k.name); } 
     else { activeRoulettePool = []; }
-    saveRouletteProgress(); // Guardamos al habilitar/quitar todos
+    saveRouletteProgress();
     renderRouletteGrid();
 }
 
@@ -539,23 +567,19 @@ window.spinRoulette = function() {
         return;
     }
     
-    // Sonido de inicio del sorteo
-    if (!isMuted) { hitSound.currentTime = 0; hitSound.play().catch(e=>{}); }
+    playAudioEffect(hitSound);
     
     const randomIndex = Math.floor(Math.random() * activeRoulettePool.length);
     const chosenName = activeRoulettePool[randomIndex];
     const chosenKiller = killersList.find(k => k.name === chosenName);
     
-    // Eliminamos al asesino elegido de la lista activa
     activeRoulettePool = activeRoulettePool.filter(n => n !== chosenName);
-    saveRouletteProgress(); // ¡Guardamos el progreso automáticamente después del giro!
+    saveRouletteProgress();
     renderRouletteGrid(); 
     
-    // Variables del modal
     const modalImg = document.getElementById('roulette-modal-img');
     const modalName = document.getElementById('roulette-modal-name');
     
-    // 1. Mostrar el modal "Pensando" con estilo (sin imagen rota)
     modalImg.style.display = 'none'; 
     modalImg.classList.remove('killer-roll-animation'); 
     
@@ -563,28 +587,26 @@ window.spinRoulette = function() {
     
     document.getElementById('roulette-modal').classList.remove('hidden');
     
-    // 2. Esperamos 1.5 segundos (1500ms) y revelamos el resultado
     setTimeout(() => {
         modalImg.style.display = 'block'; 
         modalImg.src = chosenKiller.image;
         modalImg.alt = chosenKiller.name;
         
         modalName.innerHTML = chosenKiller.name;
-        
         modalImg.classList.add('killer-roll-animation');
         
-        if (!isMuted) { 
-            let finalHit = new Audio('audio/hit.mp3');
-            finalHit.volume = 1.0;
-            finalHit.play().catch(e=>{});
-        }
+        playAudioEffect(hitSound);
     }, 1500);
 }
 
 // =========================================================================
-//                  5. RULETA DE VENTAJAS Y COMODINES
+//            5. RULETA DE VENTAJAS Y COMODINES (CON GUARDADO)
 // =========================================================================
 let activePerksPool = null;
+
+function savePerksProgress() {
+    localStorage.setItem('savedPerksPool', JSON.stringify(activePerksPool));
+}
 
 window.launchPerkRoulette = function() {
     activeAppMode = "perk-roulette";
@@ -601,8 +623,20 @@ window.launchPerkRoulette = function() {
     document.getElementById('perk-roulette-view').classList.remove('hidden');
     if(!isMuted) bgMusic.play().catch(e=>{});
 
-    if (activePerksPool === null && perksList.length > 0) {
-        activePerksPool = perksList.map(p => p.name);
+    if (activePerksPool === null) {
+        const savedPerks = localStorage.getItem('savedPerksPool');
+        if (savedPerks) {
+            activePerksPool = JSON.parse(savedPerks);
+            
+            // Re-inyectar comodines personalizados si existen en la memoria guardada
+            activePerksPool.forEach(pName => {
+                if (!perksList.find(p => p.name === pName)) {
+                    perksList.push({ name: pName, image: "", isWildcard: true });
+                }
+            });
+        } else if (perksList.length > 0) {
+            activePerksPool = perksList.map(p => p.name);
+        }
     }
     
     for(let i=1; i<=4; i++) {
@@ -636,12 +670,14 @@ window.togglePerk = function(name) {
     } else {
         activePerksPool.push(name); 
     }
+    savePerksProgress();
     renderPerksPool();
 }
 
 window.setAllPerks = function(state) {
     if (state) { activePerksPool = perksList.map(p => p.name); } 
     else { activePerksPool = []; }
+    savePerksProgress();
     renderPerksPool();
 }
 
@@ -663,8 +699,9 @@ window.addWildcardPerk = function() {
     });
     
     activePerksPool.push(customName);
-    input.value = "";
+    savePerksProgress();
     
+    input.value = "";
     renderPerksPool();
 }
 
@@ -674,18 +711,16 @@ window.spinPerks = function() {
         return;
     }
     
-    if (!isMuted) { hitSound.currentTime = 0; hitSound.play().catch(e=>{}); }
+    playAudioEffect(hitSound);
     
     let shuffled = [...activePerksPool].sort(() => 0.5 - Math.random());
     let selectedNames = shuffled.slice(0, 4);
     
-    // 1. Limpiamos los slots y ponemos el signo de interrogación
     for(let i=0; i<4; i++) {
         const slot = document.getElementById(`perk-slot-${i+1}`);
         slot.innerHTML = `<p class="empty-text">?</p>`;
     }
 
-    // 2. Revelamos las cartas una por una con un retraso de 400 milisegundos
     selectedNames.forEach((perkName, index) => {
         setTimeout(() => {
             const perkObj = perksList.find(p => p.name === perkName);
@@ -694,7 +729,6 @@ window.spinPerks = function() {
             let imgHtml = perkObj.image ? `<img src="${perkObj.image}" alt="${perkObj.name}">` : `<div style="height:75px; display:flex; align-items:center; justify-content:center; color:#ff9800; font-size:2.5rem; margin-bottom:10px;">⭐</div>`;
             let nameColor = perkObj.isWildcard ? "#ff9800" : "#fff";
             
-            // Insertamos el contenido envuelto en el div que tiene la animación "reveal-pop"
             slot.innerHTML = `
                 <div class="reveal-pop" style="display:flex; flex-direction:column; align-items:center;">
                     ${imgHtml}
@@ -702,14 +736,10 @@ window.spinPerks = function() {
                 </div>
             `;
 
-            // Reproducimos un pequeño sonido (opcional) cada que cae una carta nueva
-            if (!isMuted && index > 0) { 
-                let cardTick = new Audio('audio/hit.mp3'); 
-                cardTick.volume = 0.4; 
-                cardTick.play().catch(e=>{}); 
+            if (index > 0) { 
+                playAudioEffect(hitSound, 0.4);
             }
-
-        }, index * 400); // Multiplicar el índice crea el efecto escalonado (0ms, 400ms, 800ms, 1200ms)
+        }, index * 400); 
     });
 }
 
