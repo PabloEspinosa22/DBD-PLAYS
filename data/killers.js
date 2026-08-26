@@ -502,6 +502,18 @@ const killers = [
         attackType: "Cuerpo a cuerpo",
         height: "Promedio",
         origin: "Japonés"
+    },
+    {
+        name: "La Sentencia",
+        gender: "Femenino", 
+        terrorRadius: "32m",
+        speed: "4.4 m/s",
+        attackType: "Cuerpo a cuerpo",
+        height: "Alto",
+        origin: "Celestial", 
+        year: "2026",
+        image: "img/killers/sentencia.png",
+        hint: "Miembro del Escalón Celestial que imparte castigos divinos arrasando ciudades con pilares de luz."
     }
 ];
 
