@@ -475,6 +475,14 @@ const survivors = [
         year: "2026",
         gender: "Masculino",
         origin: "Norteamericano"
+    },
+    {
+        name: "Aurora Stardotter",
+        gender: "Femenino",
+        speed: "4.0 m/s",
+        year: "2026",
+        image: "img/survivors/aurora.png",
+        hint: "Es vista como una salvadora para su pueblo y obtiene visión del futuro leyendo las estrellas."
     }
 ];
 
